@@ -12,11 +12,21 @@ class StartGameScene: SKScene {
     
     // MARK : Properties
     
+    
+    weak var gameViewController : GameViewController?
+    
     var pointAwarded = false
     var score = 0
     var highScore = HighScore(highScore: 0)
     var obsSpeed : CGFloat = -240
-    var playerSpawnOffSet : CGFloat = 150
+    var playerSpawnOffSet : CGFloat = 50
+    
+    var gamePaused = false
+    var resumeBtnClicked = false
+    var pauseBtnClicked = false
+    
+    var savedPlayerVel = CGVector()
+    var savedPlayerAngVel = CGFloat()
     
     var screen : CGRect = CGRect()
     var screenSprite : SKSpriteNode = SKSpriteNode()
@@ -57,7 +67,7 @@ class StartGameScene: SKScene {
     var showStartScreen = true
     var showLoseScreen = false
     
-    let spaceBetweenObstacles : CGFloat = 200.0
+    let spaceBetweenObstacles : CGFloat = 185.0
     
     static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("highscore")
@@ -77,13 +87,16 @@ class StartGameScene: SKScene {
         
         screen = screenSprite.frame
         
+        //Buttons
+        
+        
         labelLose = SKLabelNode(text: "LabelLose")
         labelLose.position = CGPoint(x: screen.midX, y: screen.midY + 160)
         labelLose.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelLose.fontSize = 20
         labelLose.fontName = "Helvetica Neue Light"
         
-        labelLoseScore = SKLabelNode(text: "Score: ")
+        /*labelLoseScore = SKLabelNode(text: "Score: ")
         labelLoseScore.position = CGPoint(x: screen.midX - 15, y: screen.midY + 135)
         labelLoseScore.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelLoseScore.fontSize = 20
@@ -93,18 +106,20 @@ class StartGameScene: SKScene {
         labelLoseScoreInt.position = CGPoint(x: screen.midX + 25, y: screen.midY + 135)
         labelLoseScoreInt.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelLoseScoreInt.fontSize = 20
-        labelLoseScoreInt.fontName = "Helvetica Neue Light"
+        labelLoseScoreInt.fontName = "Helvetica Neue Light"*/
         
         self.addChild(labelLose)
         self.addChild(labelLoseScore)
         self.addChild(labelLoseScoreInt)
         
-        labelTryAgain = SKLabelNode(text: "labelTryAgain")
+        labelTryAgain = SKLabelNode(text: "Tap to try again")
+        labelTryAgain.position = CGPoint(x: screen.midX, y: screen.midY + 105)
         labelTryAgain.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelTryAgain.fontSize = 20
         labelTryAgain.fontName = "Helvetica Neue Light"
         
         labelPointsFrom = SKLabelNode(text: "Points from")
+        labelPointsFrom.position = CGPoint(x: screen.midX, y: screen.midY + 135)
         labelPointsFrom.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelPointsFrom.fontSize = 20
         labelPointsFrom.fontName = "Helvetica Neue Light"
@@ -117,53 +132,51 @@ class StartGameScene: SKScene {
         labelTryAgain.zPosition = -2
         labelPointsFrom.zPosition = -2
         
-        labelStartStay = SKLabelNode(text: "Startscreen")
-        labelStartTut = SKLabelNode(text: "StartTut")
-        labelStartTutTap = SKLabelNode(text: "TutorialTap")
-        labelStartTap = SKLabelNode(text: "StartTap")
+        labelStartStay = SKLabelNode(text: "JUMPSQUARE")
+        labelStartTut = SKLabelNode(text: "Drag to prepare jump")
+        labelStartTutTap = SKLabelNode(text: "If you fall, tap to get back up again!")
+        labelStartTap = SKLabelNode(text: "Tap to start")
+        labelStartStay.position = CGPoint(x: screen.midX, y: screen.midY + 120)
+        labelStartTut.position = CGPoint(x: screen.midX, y: screen.midY + 100)
+        labelStartTutTap.position = CGPoint(x: screen.midX, y: screen.midY + 80)
+        labelStartTap.position = CGPoint(x: screen.midX, y: screen.midY + 60)
+        
+        labelStartStay.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
+        labelStartStay.fontSize = 20
+        labelStartStay.fontName = "Helvetica Neue Light"
+        labelStartTut.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
+        labelStartTut.fontSize = 20
+        labelStartTut.fontName = "Helvetica Neue Light"
+        labelStartTutTap.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
+        labelStartTutTap.fontSize = 20
+        labelStartTutTap.fontName = "Helvetica Neue Light"
+        labelStartTap.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
+        labelStartTap.fontSize = 20
+        labelStartTap.fontName = "Helvetica Neue Light"
+        
         self.addChild(labelStartStay)
         self.addChild(labelStartTut)
         self.addChild(labelStartTutTap)
         self.addChild(labelStartTap)
-        labelStartStay.position = CGPoint(x: screen.midX, y: screen.midY + 200)
-        labelStartTut.position = CGPoint(x: screen.midX, y: screen.midY + 150)
-        labelStartTutTap.position = CGPoint(x: screen.midX, y: screen.midY + 100)
-        labelStartTap.position = CGPoint(x: screen.midX, y: screen.midY + 50)
         
-        
-        let label = SKLabelNode()
-        label.text = "Score:"
-        label.position = CGPoint(x: screen.midX, y: screen.maxY - 60)
-        label.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
-        label.fontSize = 20
-        label.fontName = "Helvetica Neue Light"
-        self.addChild(label)
         
         let scoreLabel = SKLabelNode()
-        scoreLabel.position = CGPoint(x: screen.midX + 60, y: screen.maxY - 60)
+        scoreLabel.text = "Score: " + String(score)
+        scoreLabel.position = CGPoint(x: screen.midX, y: screen.maxY - 60)
         scoreLabel.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         scoreLabel.fontSize = 20
         scoreLabel.fontName = "Helvetica Neue Light"
-        scoreLabel.text = String(score)
         scoreLabel.name = "Score"
         self.addChild(scoreLabel)
         
         let highScoreLabel = SKLabelNode()
+        highScoreLabel.name = "HighScore"
         highScoreLabel.text = "Highscore: "
         highScoreLabel.position = CGPoint(x: screen.midX, y: screen.maxY - 85)
         highScoreLabel.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         highScoreLabel.fontSize = 20
         highScoreLabel.fontName = "Helvetica Neue Light"
         self.addChild(highScoreLabel)
-        
-        let highScoreLabelRef = SKLabelNode()
-        highScoreLabelRef.text = "0"
-        highScoreLabelRef.position = CGPoint(x: screen.midX + 60, y: screen.maxY - 85)
-        highScoreLabelRef.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
-        highScoreLabelRef.fontSize = 20
-        highScoreLabelRef.fontName = "Helvetica Neue Light"
-        highScoreLabelRef.name = "HighScore"
-        self.addChild(highScoreLabelRef)
         
         let checkHighScore = LoadHighScore()
         if(checkHighScore != nil) {
@@ -187,8 +200,8 @@ class StartGameScene: SKScene {
         player.name = "Bob"
         player.color = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
         player.size = CGSize(width: playerWidth, height: playerHeight)
-        player.position = CGPoint(x:CGRectGetMidX(self.frame) - playerSpawnOffSet, y:CGRectGetMidY(self.frame))
-        player.physicsBody = SKPhysicsBody(rectangleOfSize:player.frame.size);
+        player.position = CGPoint(x:10000, y:10000)
+        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.frame.size)
         player.physicsBody!.restitution = -1.0
         //player.shadowCastBitMask = 1
         //player.physicsBody?.allowsRotation = false
@@ -196,8 +209,8 @@ class StartGameScene: SKScene {
         self.addChild(player)
         
         face = SKSpriteNode(imageNamed: "Smile")
-        face.size = CGSize(width: 50, height: 50)
-        face.position = CGPoint(x: 10, y: 25)
+        face.size = CGSize(width: 60, height: 60)
+        face.position = CGPoint(x: 10, y: 20)
         player.addChild(face)
         
         JumpArrow = SKSpriteNode(imageNamed: "Arrow")
@@ -210,7 +223,7 @@ class StartGameScene: SKScene {
         obs.name = "Obstacle"
         obs.color = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         obs.size = CGSize(width: 30, height: 40)
-        obs.position = CGPoint(x:1000, y: screen.midY)
+        obs.position = CGPoint(x:-400, y: screen.midY)
         obs.physicsBody = SKPhysicsBody(rectangleOfSize:obs.frame.size);
         obs.physicsBody!.restitution = 0.0
         obs.physicsBody?.velocity.dx = obsSpeed
@@ -243,6 +256,10 @@ class StartGameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
+        if(gamePaused) {
+            return
+        }
+        
         for touch in touches {
             let location = touch.locationInNode(self)
             
@@ -258,13 +275,20 @@ class StartGameScene: SKScene {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if(gamePaused) {
+            return
+        }
+        
         for touch in touches {
             let location = touch.locationInNode(self)
             let touchBegan = self.childNodeWithName("touchBegan") as! SKSpriteNode
             
-            if((player.position.y - (player.frame.height/2) <= 6 + ground.position.y + (ground.size.height/2)) &&
-                ((player.zRotation < 1 && player.zRotation > -1)) &&
-                (player.physicsBody?.angularVelocity < 0.0001 && player.physicsBody?.angularVelocity > -0.0001)) {
+            
+            let playerIsOnGround = (player.position.y - (player.frame.height/2) <= 6 + ground.position.y + (ground.size.height/2))
+            let playerIsNotRotated = (player.zRotation < 1 && player.zRotation > -1)
+            let playerIsNotRotating = (player.physicsBody?.angularVelocity < 0.0001 && player.physicsBody?.angularVelocity > -0.0001)
+            
+            if(playerIsOnGround && playerIsNotRotated && playerIsNotRotating) {
                     
                     player.zRotation = 0.0
                     
@@ -302,6 +326,11 @@ class StartGameScene: SKScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        if(gamePaused) {
+            return
+        }
+        
         for touch in touches {
             let touchBegan = self.childNodeWithName("touchBegan")
             
@@ -332,6 +361,7 @@ class StartGameScene: SKScene {
                     
                     if(!(player.zRotation < CGFloat(M_PI/2+0.1) && player.zRotation > CGFloat(M_PI/2-0.1))) &&
                         !((player.zRotation > -CGFloat(M_PI/2+0.1) && player.zRotation < -CGFloat(M_PI/2-0.1))) {
+                            player.physicsBody!.angularVelocity = 0
                             player.physicsBody!.applyImpulse(dragVector)
                     } else {
                         let onlyXVector = CGVector(dx: dragVector.dx, dy: 0.0)
@@ -363,6 +393,7 @@ class StartGameScene: SKScene {
         }
     }
     
+    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         
@@ -371,18 +402,49 @@ class StartGameScene: SKScene {
         //b.size = screen.size
         screen = screenSprite.frame
         
+        if(pauseBtnClicked) {
+            gamePaused = true
+            obs.physicsBody?.velocity = CGVector.zero
+            obs2.physicsBody?.velocity = CGVector.zero
+            
+            savedPlayerVel = (player.physicsBody?.velocity)!
+            savedPlayerAngVel = (player.physicsBody?.angularVelocity)!
+            player.physicsBody?.velocity = CGVector.zero
+            player.physicsBody?.angularVelocity = 0
+            player.physicsBody?.affectedByGravity = false
+            pauseBtnClicked = false
+        }
+        
+        if(resumeBtnClicked) {
+            obs.physicsBody?.velocity = CGVector(dx: obsSpeed, dy: 0)
+            obs2.physicsBody?.velocity = CGVector(dx: obsSpeed, dy: 0)
+            
+            player.physicsBody?.velocity = savedPlayerVel
+            player.physicsBody?.angularVelocity = savedPlayerAngVel
+            player.physicsBody?.affectedByGravity = true
+            resumeBtnClicked = false
+        }
+        
+       /* if(mainButton.clicked) {
+            self.removeFromParent()
+            self.view?.presentScene(nil)
+            gameViewController?.navigationController?.popViewControllerAnimated(true)
+            gameViewController?.navigationController?.navigationBarHidden = false
+        }*/
+        
         //setScoreLabels()
-        if(showLoseScreen || showStartScreen) {
+        
+        if(showLoseScreen || showStartScreen || gamePaused) {
             return
         }
         
-        let obsDistanceFromScreen : CGFloat = 200
+        let obsDistanceFromScreen : CGFloat = 600
         if(obs.position.x > screen.size.width + obsDistanceFromScreen || obs.position.x < 0) &&
             (obs2.position.x > screen.size.width + obsDistanceFromScreen || obs2.position.x < 0) {
                 
                 obs.position.x = screen.size.width + obsDistanceFromScreen
                 
-                obs.size.height = CGFloat(arc4random_uniform(UInt32(screen.size.height/CGFloat(3.5))) + 100)
+                obs.size.height = CGFloat(arc4random_uniform(UInt32(screen.size.height/CGFloat(3.5))) + 50)
                 //obs.size.height = screen.height/2
                 
                 obs.physicsBody = SKPhysicsBody(rectangleOfSize:obs.frame.size);
@@ -423,7 +485,20 @@ class StartGameScene: SKScene {
         
         // MARK : Award points
         if(obs.position.x < player.position.x && !pointAwarded) {
-            score++
+            
+            //floating last score
+            let highScrLabel = self.childNodeWithName("HighScore") as! SKLabelNode
+            let lbl = SKLabelNode(text: String(score))
+            lbl.fontColor = UIColor.blackColor()
+            lbl.fontSize = highScrLabel.fontSize
+            lbl.fontName = highScrLabel.fontName
+            lbl.position = CGPoint(x: -30, y: 0)
+            lbl.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(0.5)), completion: { lbl.removeFromParent() })
+            highScrLabel.runAction(SKAction.moveBy(CGVector(dx: 30, dy: 0), duration: NSTimeInterval(0.0)))
+            highScrLabel.runAction(SKAction.moveBy(CGVector(dx: -30, dy: 0), duration: NSTimeInterval(0.5)))
+            highScrLabel.addChild(lbl)
+            
+            score += 1
             
             if(score > highScore?.highScore) {
                 highScore?.highScore = score
@@ -434,7 +509,15 @@ class StartGameScene: SKScene {
             
             pointAwarded = true
             
-            jumpedThrough++
+            jumpedThrough += 1
+            
+            let popup = Popup()
+            popup.position = CGPoint(x: 0, y: spaceBetweenObstacles/2.0 + 10)
+            popup.size = CGSize(width: 20, height: 20)
+            popup.Pop(30, duration: 0.3, text: "+1")
+            obs.addChild(popup)
+            
+            
             if(jumpedThrough >= numberOfJumpsBeforeColorChange) {
             
                 var newColor = screenSprite.color
@@ -484,12 +567,14 @@ class StartGameScene: SKScene {
             }
             
             
-            score = 0
-            
             let touchBegan = self.childNodeWithName("TouchBegan")
             touchBegan?.removeFromParent()
             
             showLoseScreen = true
+            
+            setScoreLabels()
+            
+            score = 0
         }
         
         if(showLoseScreen) {
@@ -542,17 +627,27 @@ class StartGameScene: SKScene {
     // MARK : Scores
     
     func setScoreLabels() {
-        let scrLabel = self.childNodeWithName("Score") as! SKLabelNode
-        //scrLabel.position.x = screen.midX
-        //scrLabel.position.y = screen.midY
-        //let player = self.childNodeWithName("Player")
-        
-        scrLabel.text = String(score)
-        //scrLabel.text = String(player?.position)
-        
-        let highScrLabel = self.childNodeWithName("HighScore") as! SKLabelNode
-        highScrLabel.text = String(highScore!.highScore)
-        //highScrLabel.text = String(screen)
+        if(showLoseScreen) {
+            let scrLabel = self.childNodeWithName("Score") as! SKLabelNode
+            
+            scrLabel.text = "Score: " + String(score)
+            
+            let highScrLabel = self.childNodeWithName("HighScore") as! SKLabelNode
+            highScrLabel.position = CGPoint(x: scrLabel.position.x,
+                                            y: scrLabel.position.y - 20)
+            highScrLabel.text = "Highscore: " + String(highScore!.highScore)
+            highScrLabel.fontSize = scrLabel.fontSize
+        } else {
+            let scrLabel = self.childNodeWithName("Score") as! SKLabelNode
+            
+            scrLabel.text = "Score"
+            
+            let highScrLabel = self.childNodeWithName("HighScore") as! SKLabelNode
+            highScrLabel.position = CGPoint(x: scrLabel.position.x,
+                                            y: scrLabel.position.y - 45)
+            highScrLabel.text = String(score)
+            highScrLabel.fontSize = 50
+        }
     }
     
     func SaveHighScore() {
