@@ -16,7 +16,6 @@
 		BAED3CFA1C5E5DED007326D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAED3CF81C5E5DED007326D9 /* Main.storyboard */; };
 		BAED3CFC1C5E5DED007326D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAED3CFB1C5E5DED007326D9 /* Assets.xcassets */; };
 		BAED3CFF1C5E5DED007326D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAED3CFD1C5E5DED007326D9 /* LaunchScreen.storyboard */; };
-		BAED3D0A1C5E5DED007326D9 /* JumpSquareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED3D091C5E5DED007326D9 /* JumpSquareTests.swift */; };
 		BAED6C051D341F1800C4253B /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED6C041D341F1800C4253B /* Popup.swift */; };
 		BAED6C071D34382800C4253B /* TutorialDragViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED6C061D34382800C4253B /* TutorialDragViewController.swift */; };
 		BAED6C091D358F4400C4253B /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED6C081D358F4400C4253B /* StartMenuViewController.swift */; };
@@ -46,8 +45,6 @@
 		BAED3CFE1C5E5DED007326D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAED3D001C5E5DED007326D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAED3D051C5E5DED007326D9 /* JumpSquare.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JumpSquare.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAED3D091C5E5DED007326D9 /* JumpSquareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpSquareTests.swift; sourceTree = "<group>"; };
-		BAED3D0B1C5E5DED007326D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BAED6C041D341F1800C4253B /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		BAED6C061D34382800C4253B /* TutorialDragViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDragViewController.swift; sourceTree = "<group>"; };
 		BAED6C081D358F4400C4253B /* StartMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				BAED3CEF1C5E5DED007326D9 /* JumpSquare */,
-				BAED3D081C5E5DED007326D9 /* JumpSquareTests */,
 				BAED3CEE1C5E5DED007326D9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,15 +106,6 @@
 				BAE32D3A1C622DD10023D033 /* HighScore.swift */,
 			);
 			path = JumpSquare;
-			sourceTree = "<group>";
-		};
-		BAED3D081C5E5DED007326D9 /* JumpSquareTests */ = {
-			isa = PBXGroup;
-			children = (
-				BAED3D091C5E5DED007326D9 /* JumpSquareTests.swift */,
-				BAED3D0B1C5E5DED007326D9 /* Info.plist */,
-			);
-			path = JumpSquareTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +226,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAED3D0A1C5E5DED007326D9 /* JumpSquareTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
