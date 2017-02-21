@@ -30,6 +30,7 @@ class StartGameScene: SKScene {
     
     var screen : CGRect = CGRect()
     var screenSprite : SKSpriteNode = SKSpriteNode()
+    var screenChangeSprite : SKSpriteNode = SKSpriteNode()
     
     var bronze = 6
     var silver = 15
@@ -83,6 +84,7 @@ class StartGameScene: SKScene {
         screenSprite = SKSpriteNode(color: UIColor.redColor(), size: screen.size)
         screenSprite.position = screen.origin
         screenSprite.color = colorWithHexString(bgColors[0])
+        screenSprite.zPosition = -2
         self.addChild(screenSprite)
         
         screen = screenSprite.frame
@@ -126,20 +128,20 @@ class StartGameScene: SKScene {
         self.addChild(labelTryAgain)
         self.addChild(labelPointsFrom)
 
-        labelLose.zPosition = -2
-        labelLoseScore.zPosition = -2
-        labelLoseScoreInt.zPosition = -2
-        labelTryAgain.zPosition = -2
-        labelPointsFrom.zPosition = -2
+        labelLose.zPosition = -4
+        labelLoseScore.zPosition = -4
+        labelLoseScoreInt.zPosition = -4
+        labelTryAgain.zPosition = -4
+        labelPointsFrom.zPosition = -4
         
         labelStartStay = SKLabelNode(text: "JUMPSQUARE")
-        labelStartTut = SKLabelNode(text: "Drag to prepare jump")
-        labelStartTutTap = SKLabelNode(text: "If you fall, tap to get back up again!")
+        //labelStartTut = SKLabelNode(text: "Drag to prepare jump")
+        //labelStartTutTap = SKLabelNode(text: "If you fall, tap to get back up again!")
         labelStartTap = SKLabelNode(text: "Tap to start")
         labelStartStay.position = CGPoint(x: screen.midX, y: screen.midY + 120)
         labelStartTut.position = CGPoint(x: screen.midX, y: screen.midY + 100)
         labelStartTutTap.position = CGPoint(x: screen.midX, y: screen.midY + 80)
-        labelStartTap.position = CGPoint(x: screen.midX, y: screen.midY + 60)
+        labelStartTap.position = CGPoint(x: screen.midX, y: screen.midY)
         
         labelStartStay.fontColor = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
         labelStartStay.fontSize = 20
@@ -249,6 +251,12 @@ class StartGameScene: SKScene {
         obs2.physicsBody?.allowsRotation = false
         
         self.addChild(obs2)
+        
+        screenChangeSprite = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: self.view!.frame.size.height*3, height: self.view!.frame.size.width*3))
+        screenChangeSprite.position = CGPoint(x: screenChangeSprite.frame.width/2, y: 0)
+        screenChangeSprite.zPosition = -1
+        screenChangeSprite.alpha = 0
+        obs.addChild(screenChangeSprite)
         
         self.view!.multipleTouchEnabled = false;
     }
@@ -387,7 +395,7 @@ class StartGameScene: SKScene {
                 setScoreLabels()
             }
             
-            JumpArrow.zPosition = -2
+            JumpArrow.zPosition = -4
             JumpArrow.size.height = 0
             touchBegan?.removeFromParent()
         }
@@ -439,10 +447,43 @@ class StartGameScene: SKScene {
         }
         
         let obsDistanceFromScreen : CGFloat = 600
-        if(obs.position.x > screen.size.width + obsDistanceFromScreen || obs.position.x < 0) &&
-            (obs2.position.x > screen.size.width + obsDistanceFromScreen || obs2.position.x < 0) {
+        if(obs.position.x > screen.size.width + obsDistanceFromScreen || obs.position.x < -obsDistanceFromScreen) &&
+            (obs2.position.x > screen.size.width + obsDistanceFromScreen || obs2.position.x < -obsDistanceFromScreen) {
+
+            
+            if(jumpedThrough >= numberOfJumpsBeforeColorChange - 1) {
                 
-                obs.position.x = screen.size.width + obsDistanceFromScreen
+                var newColor = screenSprite.color
+                var newBgColorHex = bgColorHex
+                
+                while(bgColorHex == newBgColorHex) {
+                    let rnd : Int = Int(arc4random_uniform(UInt32(bgColors.count-1)))
+                    newBgColorHex = bgColors[rnd]
+                }
+                
+                newColor = colorWithHexString(newBgColorHex)
+                bgColorHex = newBgColorHex
+                
+                let changeColorAction = SKAction.colorizeWithColor(newColor, colorBlendFactor: 1.0, duration: 0.0)
+                screenChangeSprite.runAction(changeColorAction)
+                screenChangeSprite.alpha = 1
+                //screenSprite.alpha = 0
+            }
+            
+            if(jumpedThrough >= numberOfJumpsBeforeColorChange) {
+                let changeColorAction = SKAction.colorizeWithColor(screenChangeSprite.color, colorBlendFactor: 1.0, duration: 0.0)
+                screenSprite.runAction(changeColorAction)
+                
+                screenChangeSprite.alpha = 0
+                screenSprite.alpha = 1
+                
+                jumpedThrough = 0
+            }
+            
+            
+            
+            
+                obs.position.x = screen.size.width + obs.size.width/2
                 
                 obs.size.height = CGFloat(arc4random_uniform(UInt32(screen.size.height/CGFloat(3.5))) + 50)
                 //obs.size.height = screen.height/2
@@ -462,7 +503,7 @@ class StartGameScene: SKScene {
                 obs.physicsBody!.collisionBitMask = ground.physicsBody!.collisionBitMask
                 
                 
-                obs2.position.x = screen.size.width + obsDistanceFromScreen
+                obs2.position.x = screen.size.width + obs2.size.width/2
                 
                 //obs2.size.height = screen.height - obs.size.height - 100
                 
@@ -481,6 +522,11 @@ class StartGameScene: SKScene {
                 obs2.position.y = obs.position.y + obs.size.height/2 + obs2.size.height/2 + spaceBetweenObstacles
                 
                 pointAwarded = false
+            
+            if(score <= 0) {
+                obs.position.x = screen.size.width + obsDistanceFromScreen
+                obs2.position.x = screen.size.width + obsDistanceFromScreen
+            }
         }
         
         // MARK : Award points
@@ -516,27 +562,6 @@ class StartGameScene: SKScene {
             popup.size = CGSize(width: 20, height: 20)
             popup.Pop(30, duration: 0.3, text: "+1")
             obs.addChild(popup)
-            
-            
-            if(jumpedThrough >= numberOfJumpsBeforeColorChange) {
-            
-                var newColor = screenSprite.color
-                var newBgColorHex = bgColorHex
-                
-                while(bgColorHex == newBgColorHex) {
-                    let rnd : Int = Int(arc4random_uniform(UInt32(bgColors.count-1)))
-                    newBgColorHex = bgColors[rnd]
-                }
-                
-                newColor = colorWithHexString(newBgColorHex)
-                bgColorHex = newBgColorHex
-                let changeColorAction = SKAction.colorizeWithColor(newColor, colorBlendFactor: 1.0, duration: 0.5)
-                screenSprite.runAction(changeColorAction)
-                
-                //bg.color = newColor;
-                
-                jumpedThrough = 0
-            }
         }
         
         if(!screen.intersects(player.frame)) {
@@ -549,6 +574,8 @@ class StartGameScene: SKScene {
             
             obs.position.x = 10000
             obs2.position.x = 10000
+            
+            screenChangeSprite.alpha = 0
             
             paused = true
             
@@ -580,17 +607,17 @@ class StartGameScene: SKScene {
         if(showLoseScreen) {
             labelLose.zPosition = 2
             labelLoseScore.zPosition = 2
-            labelLoseScoreInt.zPosition = 2
+            //labelLoseScoreInt.zPosition = 2
             labelTryAgain.zPosition = 2
             labelPointsFrom.zPosition = 2
             
         } else {
-            labelLose.zPosition = -2
-            labelLoseScore.zPosition = -2
-            labelLoseScoreInt.zPosition = -2
+            labelLose.zPosition = -4
+            labelLoseScore.zPosition = -4
+            labelLoseScoreInt.zPosition = -4
             labelLoseScoreInt.text = String(score)
-            labelTryAgain.zPosition = -2
-            labelPointsFrom.zPosition = -2
+            labelTryAgain.zPosition = -4
+            labelPointsFrom.zPosition = -4
         }
         
         if(showStartScreen) {
@@ -599,10 +626,10 @@ class StartGameScene: SKScene {
             labelStartTutTap.zPosition = 2
             labelStartTut.zPosition = 2
         } else {
-            labelStartStay.zPosition = -2
-            labelStartTap.zPosition = -2
-            labelStartTutTap.zPosition = -2
-            labelStartTut.zPosition = -2
+            labelStartStay.zPosition = -4
+            labelStartTap.zPosition = -4
+            labelStartTutTap.zPosition = -4
+            labelStartTut.zPosition = -4
         }
         
         //let scrLabel = self.childNodeWithName("Score") as! SKLabelNode
@@ -637,6 +664,9 @@ class StartGameScene: SKScene {
                                             y: scrLabel.position.y - 20)
             highScrLabel.text = "Highscore: " + String(highScore!.highScore)
             highScrLabel.fontSize = scrLabel.fontSize
+            
+            highScrLabel.removeAllChildren()
+            highScrLabel.removeAllActions()
         } else {
             let scrLabel = self.childNodeWithName("Score") as! SKLabelNode
             

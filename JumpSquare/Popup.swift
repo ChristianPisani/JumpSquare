@@ -17,6 +17,7 @@ class Popup: SKSpriteNode {
     
     func Pop(distance : CGFloat, duration : CGFloat, text : String) {
         let label = SKLabelNode(text: text)
+        label.fontColor = UIColor.blackColor()
         self.addChild(label)
         
         self.runAction(SKAction.moveBy(CGVector(dx: 0, dy: distance), duration: NSTimeInterval(duration)),
