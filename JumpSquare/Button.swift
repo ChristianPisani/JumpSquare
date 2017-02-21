@@ -26,31 +26,31 @@ class Button: SKSpriteNode {
     }
     
     //remember to call this in touchesbegan
-    func touchesBegan(touches: Set<UITouch>, view: SKNode) {
-        if(hidden) {
+    func touchesBegan(_ touches: Set<UITouch>, view: SKNode) {
+        if(isHidden) {
             return
         }
         
         for touch in touches {
-            touchBegan = touch.locationInNode(view)
+            touchBegan = touch.location(in: view)
         }
     }
     
     //remember to call this in touchesended
-    func touchesEnded(touches: Set<UITouch>, view: SKNode) {
-        if(hidden) {
+    func touchesEnded(_ touches: Set<UITouch>, view: SKNode) {
+        if(isHidden) {
             return
         }
         
         for touch in touches {
-            touchEnded = touch.locationInNode(view)
+            touchEnded = touch.location(in: view)
             touchHasEnded = true
         }
     }
     
     //remember to call this in update
     func update() {
-        if(hidden) {
+        if(isHidden) {
             return
         }
         

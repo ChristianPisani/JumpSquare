@@ -10,11 +10,11 @@ import UIKit
 
 class HighScore: NSObject, NSCoding {
     // MARK : Property
-    var highScore : Int
+    var highScore : Int = 0
     
     // MARK : Archiving Paths
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("highscore")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("highscore")
     
     init?(highScore: Int) {
         self.highScore = highScore
@@ -28,12 +28,12 @@ class HighScore: NSObject, NSCoding {
     }
     
     // MARK : NSCoding
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(highScore, forKey: PropertyKey.highScoreKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(highScore, forKey: PropertyKey.highScoreKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let highScore = aDecoder.decodeObjectForKey(PropertyKey.highScoreKey) as! Int
+        let highScore = aDecoder.decodeObject(forKey: PropertyKey.highScoreKey) as! Int
         
         self.init(highScore: highScore)
     }

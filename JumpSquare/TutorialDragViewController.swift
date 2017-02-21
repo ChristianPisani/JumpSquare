@@ -14,7 +14,7 @@ class TutorialDragViewController: UIViewController {
     
     let pointer = SKSpriteNode(imageNamed: "pointer")
     let arrow = SKSpriteNode(imageNamed: "Arrow")
-    let playerIcon = SKSpriteNode(color: UIColor.redColor(), size: CGSize(width: 60, height: 100))
+    let playerIcon = SKSpriteNode(color: UIColor.red, size: CGSize(width: 60, height: 100))
     var obs1 = SKSpriteNode()
     var obs2 = SKSpriteNode()
     
@@ -37,9 +37,9 @@ class TutorialDragViewController: UIViewController {
         playerPos = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY - 140)
         pointerSize = CGSize(width: 50, height: 50)
         
-        obs1 = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 20,
+        obs1 = SKSpriteNode(color: UIColor.black, size: CGSize(width: 20,
             height: obs2Pos.frame.height))
-        obs2 = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 20, height: obs2Pos.frame.height))
+        obs2 = SKSpriteNode(color: UIColor.black, size: CGSize(width: 20, height: obs2Pos.frame.height))
         
         pointer.size = pointerSize
         arrow.size = CGSize(width: 50, height: 0)
@@ -54,7 +54,7 @@ class TutorialDragViewController: UIViewController {
         skView.showsFPS = false
         skView.showsNodeCount = false
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
+        scene.scaleMode = .resizeFill
         skView.presentScene(scene)
                 skView.scene!.backgroundColor = self.view.backgroundColor!
      
@@ -66,7 +66,7 @@ class TutorialDragViewController: UIViewController {
                     to: CGPoint(x: self.view.frame.midX - 40, y: self.view.frame.midY + 40), completion:  { return } )
     }
     
-    @IBAction func onStepperChanged(sender: AnyObject) {
+    @IBAction func onStepperChanged(_ sender: AnyObject) {
         pageLabel.text = "Page " + String(Int(stepper.value))
         arrow.removeAllActions()
         playerIcon.removeAllActions()
@@ -162,58 +162,58 @@ class TutorialDragViewController: UIViewController {
         }
     }
     
-    func PlayerSlide(duration : CGFloat) {
+    func PlayerSlide(_ duration : CGFloat) {
         textView.text = "Remember that you can always move to the sides to get more space"
         
         pointer.alpha = 1
         pointer.size = pointerSize
         playerIcon.position = CGPoint(x: self.view.frame.midX + 25, y: self.view.frame.midY - 140)
         
-        playerIcon.runAction(SKAction.rotateToAngle(0,
-            duration: NSTimeInterval(0)))
+        playerIcon.run(SKAction.rotate(toAngle: 0,
+            duration: TimeInterval(0)))
         
         pointer.position = CGPoint(x: self.view.frame.midX - 25, y: self.view.frame.midY + 110)
-        pointer.runAction(SKAction.moveBy(CGVector(dx: 50, dy: 0), duration: NSTimeInterval(duration)))
+        pointer.run(SKAction.move(by: CGVector(dx: 50, dy: 0), duration: TimeInterval(duration)))
         
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(duration)), completion:
-            { self.pointer.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(duration))) } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(duration)), completion:
+            { self.pointer.run(SKAction.fadeOut(withDuration: TimeInterval(duration))) } )
         
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(duration)), completion:
-            { self.pointer.runAction(SKAction.resizeByWidth(self.pointerSize.width + 20, height: self.pointerSize.height + 20, duration: NSTimeInterval(duration))) } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(duration)), completion:
+            { self.pointer.run(SKAction.resize(byWidth: self.pointerSize.width + 20, height: self.pointerSize.height + 20, duration: TimeInterval(duration))) } )
         
-        playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration)),
-                             completion: { self.playerIcon.runAction(SKAction.moveBy(CGVector(dx: -50, dy: 0), duration: NSTimeInterval(duration)),
-                             completion: { self.playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration + 1)),
+        playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration)),
+                             completion: { self.playerIcon.run(SKAction.move(by: CGVector(dx: -50, dy: 0), duration: TimeInterval(duration)),
+                             completion: { self.playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration + 1)),
                                 completion: { self.PlayerSlideDown(duration) } ) } ) } )
     }
     
-    func PlayerSlideDown(duration : CGFloat) {
+    func PlayerSlideDown(_ duration : CGFloat) {
         textView.text = "Even if you're downed"
         
         pointer.alpha = 1
         pointer.size = pointerSize
         
-        playerIcon.runAction(SKAction.rotateToAngle(CGFloat(GLKMathDegreesToRadians(90)),
-            duration: NSTimeInterval(0)))
+        playerIcon.run(SKAction.rotate(toAngle: CGFloat(GLKMathDegreesToRadians(90)),
+            duration: TimeInterval(0)))
         
         playerIcon.position = CGPoint(x: self.view.frame.midX + 25 + playerIcon.size.height/2, y: self.view.frame.midY - 140 + playerIcon.size.width / 2)
         
         pointer.position = CGPoint(x: self.view.frame.midX - 25, y: self.view.frame.midY + 110)
-        pointer.runAction(SKAction.moveBy(CGVector(dx: 50, dy: 0), duration: NSTimeInterval(duration)))
+        pointer.run(SKAction.move(by: CGVector(dx: 50, dy: 0), duration: TimeInterval(duration)))
         
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(duration)), completion:
-            { self.pointer.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(duration))) } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(duration)), completion:
+            { self.pointer.run(SKAction.fadeOut(withDuration: TimeInterval(duration))) } )
         
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(duration)), completion:
-            { self.pointer.runAction(SKAction.resizeByWidth(self.pointerSize.width + 20, height: self.pointerSize.height + 20, duration: NSTimeInterval(duration))) } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(duration)), completion:
+            { self.pointer.run(SKAction.resize(byWidth: self.pointerSize.width + 20, height: self.pointerSize.height + 20, duration: TimeInterval(duration))) } )
         
-        playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration)),
-                             completion: { self.playerIcon.runAction(SKAction.moveBy(CGVector(dx: -50, dy: 0), duration: NSTimeInterval(duration)),
-                                completion: { self.playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration + 0.5)),
+        playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration)),
+                             completion: { self.playerIcon.run(SKAction.move(by: CGVector(dx: -50, dy: 0), duration: TimeInterval(duration)),
+                                completion: { self.playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration + 0.5)),
                                     completion: { self.PlayerSlide(duration) } ) } ) } )
     }
     
-    func playerHoop(duration : CGFloat) {
+    func playerHoop(_ duration : CGFloat) {
         moveObstacles(duration)
     }
     
@@ -225,7 +225,7 @@ class TutorialDragViewController: UIViewController {
         obs2.addChild(popup)
     }
     
-    func moveObstacles(duration : CGFloat) {
+    func moveObstacles(_ duration : CGFloat) {
         //playerIcon.position = CGPoint(x: self.view.frame.midX - 20,
         //                              y: obs2Pos.frame.origin.y + (obs2Pos.frame.height/2))
         
@@ -234,46 +234,46 @@ class TutorialDragViewController: UIViewController {
         obs1.size = CGSize(width: obs1Pos.frame.width, height: tutView.frame.height/2 - spaceBetweenObstacles/2)
         obs2.size = CGSize(width: obs2Pos.frame.width, height: tutView.frame.height/2 - spaceBetweenObstacles/2)
         
-        obs1.runAction(SKAction.waitForDuration(NSTimeInterval(1.3)), completion: { self.AwardPoint() })
+        obs1.run(SKAction.wait(forDuration: TimeInterval(1.3)), completion: { self.AwardPoint() })
         
-        obs1.runAction(SKAction.moveTo(CGPoint(x: tutView.frame.maxX, y: tutView.frame.maxY + spaceBetweenObstacles/4), duration: NSTimeInterval(0)))
-        obs2.runAction(SKAction.moveTo(CGPoint(x: tutView.frame.maxX, y: tutView.frame.minY + obs2.frame.height), duration: NSTimeInterval(0)), completion: {
-            self.playerIcon.runAction(SKAction.moveTo(CGPoint(x: self.playerIcon.frame.midX, y: self.obs2.frame.minY), duration: NSTimeInterval(0))) } )
+        obs1.run(SKAction.move(to: CGPoint(x: tutView.frame.maxX, y: tutView.frame.maxY + spaceBetweenObstacles/4), duration: TimeInterval(0)))
+        obs2.run(SKAction.move(to: CGPoint(x: tutView.frame.maxX, y: tutView.frame.minY + obs2.frame.height), duration: TimeInterval(0)), completion: {
+            self.playerIcon.run(SKAction.move(to: CGPoint(x: self.playerIcon.frame.midX, y: self.obs2.frame.minY), duration: TimeInterval(0))) } )
         
-        obs1.color = UIColor.blackColor()
-        obs2.color = UIColor.blackColor()
+        obs1.color = UIColor.black
+        obs2.color = UIColor.black
         
-        obs1.runAction(SKAction.moveTo(CGPoint(x: tutView.frame.minX - 10, y: tutView.frame.maxY + spaceBetweenObstacles/4), duration: NSTimeInterval(3)))
-        obs2.runAction(SKAction.moveTo(CGPoint(x: tutView.frame.minX - 10, y: tutView.frame.minY + obs2.frame.height), duration: NSTimeInterval(3)))
+        obs1.run(SKAction.move(to: CGPoint(x: tutView.frame.minX - 10, y: tutView.frame.maxY + spaceBetweenObstacles/4), duration: TimeInterval(3)))
+        obs2.run(SKAction.move(to: CGPoint(x: tutView.frame.minX - 10, y: tutView.frame.minY + obs2.frame.height), duration: TimeInterval(3)))
         
-        obs1.runAction(SKAction.waitForDuration(NSTimeInterval(4)), completion: { self.moveObstacles(duration) })
+        obs1.run(SKAction.wait(forDuration: TimeInterval(4)), completion: { self.moveObstacles(duration) })
         
         let duration = 0.8
-        playerIcon.runAction(SKAction.resizeToHeight(playerIcon.frame.height - 20, duration: duration))
-        playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration)), completion: {
+        playerIcon.run(SKAction.resize(toHeight: playerIcon.frame.height - 20, duration: duration))
+        playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration)), completion: {
             self.PlayerJump(0, playerHeight: 60) })
-        playerIcon.runAction(SKAction.waitForDuration(NSTimeInterval(duration + 1.2)),
-                             completion: { self.playerIcon.runAction(SKAction.moveTo(CGPoint(x: self.playerIcon.frame.midX, y: self.obs2.frame.minY),
-                                duration: NSTimeInterval(0.3))) })
+        playerIcon.run(SKAction.wait(forDuration: TimeInterval(duration + 1.2)),
+                             completion: { self.playerIcon.run(SKAction.move(to: CGPoint(x: self.playerIcon.frame.midX, y: self.obs2.frame.minY),
+                                duration: TimeInterval(0.3))) })
     }
     
-    func clickPointer(duration : CGFloat, from : CGPoint, to : CGPoint, completion: () -> Void) {
+    func clickPointer(_ duration : CGFloat, from : CGPoint, to : CGPoint, completion: @escaping () -> Void) {
         playerIcon.size.height = 100
         playerIcon.position = CGPoint(x: playerPos.x - playerIcon.size.width/2, y: playerPos.y)
         pointer.alpha = 1
         pointer.size = CGSize(width: pointerSize.width + 20, height: pointerSize.width + 20)
         
-        playerIcon.runAction(SKAction.rotateToAngle(CGFloat(GLKMathDegreesToRadians(90)),
-            duration: NSTimeInterval(0)))
+        playerIcon.run(SKAction.rotate(toAngle: CGFloat(GLKMathDegreesToRadians(90)),
+            duration: TimeInterval(0)))
         
         pointer.position = CGPoint(x: from.x, y: from.y)
-        pointer.runAction(SKAction.moveTo(CGPoint(x: to.x, y: to.y),
-            duration: NSTimeInterval(duration)), completion: { completion() } )
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(2)), completion: { self.clickPointer(duration, from: from, to: to, completion: completion) } )
-        pointer.runAction(SKAction.resizeToWidth(pointerSize.width, height: pointerSize.height, duration: NSTimeInterval(duration)))
+        pointer.run(SKAction.move(to: CGPoint(x: to.x, y: to.y),
+            duration: TimeInterval(duration)), completion: { completion() } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(2)), completion: { self.clickPointer(duration, from: from, to: to, completion: completion) } )
+        pointer.run(SKAction.resize(toWidth: pointerSize.width, height: pointerSize.height, duration: TimeInterval(duration)))
     }
     
-    func movePointer(duration : CGFloat, from : CGPoint, to : CGPoint, completion: () -> Void) {
+    func movePointer(_ duration : CGFloat, from : CGPoint, to : CGPoint, completion: @escaping () -> Void) {
         arrow.size.height = 0
         arrow.size.width = 0
         playerIcon.size.height = 100
@@ -283,30 +283,30 @@ class TutorialDragViewController: UIViewController {
         pointer.size = pointerSize
         
         pointer.position = CGPoint(x: from.x, y: from.y)
-        pointer.runAction(SKAction.moveTo(CGPoint(x: to.x, y: to.y),
-            duration: NSTimeInterval(duration)), completion: { completion() } )
-        pointer.runAction(SKAction.waitForDuration(NSTimeInterval(2)), completion: { self.movePointer(duration, from: from, to: to, completion: completion) } )
-        arrow.runAction(SKAction.resizeToHeight(80, duration: NSTimeInterval(duration)))
-        arrow.runAction(SKAction.resizeToWidth(60, duration: NSTimeInterval(duration)))
-        playerIcon.runAction(SKAction.resizeToHeight(60, duration: NSTimeInterval(duration)))
+        pointer.run(SKAction.move(to: CGPoint(x: to.x, y: to.y),
+            duration: TimeInterval(duration)), completion: { completion() } )
+        pointer.run(SKAction.wait(forDuration: TimeInterval(2)), completion: { self.movePointer(duration, from: from, to: to, completion: completion) } )
+        arrow.run(SKAction.resize(toHeight: 80, duration: TimeInterval(duration)))
+        arrow.run(SKAction.resize(toWidth: 60, duration: TimeInterval(duration)))
+        playerIcon.run(SKAction.resize(toHeight: 60, duration: TimeInterval(duration)))
     }
     
-    func PlayerJumpWithPointer(duration : CGFloat) {
-        pointer.runAction(SKAction.resizeToWidth(pointer.size.width + 20, height: pointer.size.height + 20,
-            duration: NSTimeInterval(duration)))
-        pointer.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(duration)))
-        arrow.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(0)))
+    func PlayerJumpWithPointer(_ duration : CGFloat) {
+        pointer.run(SKAction.resize(toWidth: pointer.size.width + 20, height: pointer.size.height + 20,
+            duration: TimeInterval(duration)))
+        pointer.run(SKAction.fadeOut(withDuration: TimeInterval(duration)))
+        arrow.run(SKAction.fadeOut(withDuration: TimeInterval(0)))
         
         PlayerJump(40, playerHeight: 100)
     }
     
-    func PlayerJump(height : CGFloat, playerHeight: CGFloat) {
-        playerIcon.runAction(SKAction.resizeToHeight(playerHeight, duration: NSTimeInterval(0)))
-        playerIcon.runAction(SKAction.moveTo(CGPoint(x: playerIcon.frame.midX,
-            y: (tutView.frame.midY + tutView.frame.midY)/2 + playerIcon.frame.height), duration: NSTimeInterval(0.3)))
+    func PlayerJump(_ height : CGFloat, playerHeight: CGFloat) {
+        playerIcon.run(SKAction.resize(toHeight: playerHeight, duration: TimeInterval(0)))
+        playerIcon.run(SKAction.move(to: CGPoint(x: playerIcon.frame.midX,
+            y: (tutView.frame.midY + tutView.frame.midY)/2 + playerIcon.frame.height), duration: TimeInterval(0.3)))
     }
     
-    func PlayerRotate(duration : CGFloat) {
-        playerIcon.runAction(SKAction.rotateToAngle(0, duration: NSTimeInterval(duration)))
+    func PlayerRotate(_ duration : CGFloat) {
+        playerIcon.run(SKAction.rotate(toAngle: 0, duration: TimeInterval(duration)))
     }
 }

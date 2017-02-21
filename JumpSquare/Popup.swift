@@ -10,29 +10,29 @@ import SpriteKit
 
 class Popup: SKSpriteNode {
     
-    func Pop(distance : CGFloat, duration : CGFloat) {
-        self.runAction(SKAction.moveBy(CGVector(dx: 0, dy: distance), duration: NSTimeInterval(duration)),
+    func Pop(_ distance : CGFloat, duration : CGFloat) {
+        self.run(SKAction.move(by: CGVector(dx: 0, dy: distance), duration: TimeInterval(duration)),
                        completion: { self.Bounce() } )
     }
     
-    func Pop(distance : CGFloat, duration : CGFloat, text : String) {
+    func Pop(_ distance : CGFloat, duration : CGFloat, text : String) {
         let label = SKLabelNode(text: text)
-        label.fontColor = UIColor.blackColor()
+        label.fontColor = UIColor.black
         self.addChild(label)
         
-        self.runAction(SKAction.moveBy(CGVector(dx: 0, dy: distance), duration: NSTimeInterval(duration)),
+        self.run(SKAction.move(by: CGVector(dx: 0, dy: distance), duration: TimeInterval(duration)),
                        completion: { self.Bounce() } )
         
     }
     
-    private func Bounce() {
-        self.runAction(SKAction.moveBy(CGVector(dx: 0, dy: -6), duration: NSTimeInterval(0.1)),
+    fileprivate func Bounce() {
+        self.run(SKAction.move(by: CGVector(dx: 0, dy: -6), duration: TimeInterval(0.1)),
                        completion: { self.Fade() } )
     }
     
-    private func Fade() {
-        self.runAction(SKAction.fadeOutWithDuration(NSTimeInterval(1)))
-        self.runAction(SKAction.moveBy(CGVector(dx: 0, dy: 30), duration: NSTimeInterval(0.8)),
+    fileprivate func Fade() {
+        self.run(SKAction.fadeOut(withDuration: TimeInterval(1)))
+        self.run(SKAction.move(by: CGVector(dx: 0, dy: 30), duration: TimeInterval(0.8)),
                        completion: { self.removeFromParent() } )
     }
 }

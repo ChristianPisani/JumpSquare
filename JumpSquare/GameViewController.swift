@@ -28,49 +28,49 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         GoogleAdBannerView.delegate = self
         GoogleAdBannerView.adUnitID = "ca-app-pub-1460994528133368/6355604738"
         GoogleAdBannerView.rootViewController = self
-        GoogleAdBannerView.loadRequest(request)
+        GoogleAdBannerView.load(request)
         
         
         
         
-        self.navigationController?.navigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         
         scene = StartGameScene(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = false
         skView.showsNodeCount = false
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .ResizeFill
+        scene.scaleMode = .resizeFill
         scene.gameViewController = self
         skView.presentScene(scene)
         //skView.showsFPS = true
     }
     
     
-    @IBAction func pauseBtnClicked(sender: AnyObject) {
+    @IBAction func pauseBtnClicked(_ sender: AnyObject) {
         scene.gamePaused = true
         scene.pauseBtnClicked = true
-        resumeButton.hidden = false
-        quitButton.hidden = false
+        resumeButton.isHidden = false
+        quitButton.isHidden = false
     }
     
     
-    @IBAction func resumeBtnClicked(sender: AnyObject) {
+    @IBAction func resumeBtnClicked(_ sender: AnyObject) {
         scene.gamePaused = false
         scene.resumeBtnClicked = true
-        resumeButton.hidden = true
-        quitButton.hidden = true
+        resumeButton.isHidden = true
+        quitButton.isHidden = true
     }
     
-    @IBAction func quitBtnClicked(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-        self.navigationController?.navigationBarHidden = false
+    @IBAction func quitBtnClicked(_ sender: AnyObject) {
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.isNavigationBarHidden = false
         self.scene.removeAllActions()
         self.scene.removeFromParent()
         self.scene.removeAllChildren()
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 }
