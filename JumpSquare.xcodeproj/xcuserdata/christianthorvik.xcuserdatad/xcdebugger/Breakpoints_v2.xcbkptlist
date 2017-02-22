@@ -235,8 +235,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "245"
             endingLineNumber = "245"
-            landmarkName = "touchesMoved(_:withEvent:)"
-            landmarkType = "5">
+            landmarkName = "touchesMoved(_:with:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -268,7 +268,7 @@
             startingLineNumber = "435"
             endingLineNumber = "435"
             landmarkName = "update(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -284,7 +284,7 @@
             startingLineNumber = "439"
             endingLineNumber = "439"
             landmarkName = "update(_:)"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -331,8 +331,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "255"
             endingLineNumber = "255"
-            landmarkName = "didMoveToView(_:)"
-            landmarkType = "5">
+            landmarkName = "didMove(to:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

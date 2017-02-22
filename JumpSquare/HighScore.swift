@@ -33,8 +33,12 @@ class HighScore: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let highScore = aDecoder.decodeObject(forKey: PropertyKey.highScoreKey) as! Int
-        
-        self.init(highScore: highScore)
+        do {
+            if let highScore = aDecoder.decodeObject(forKey: PropertyKey.highScoreKey) as? Int {
+                self.init(highScore: highScore)
+                return
+            }
+        }
+        self.init(highScore: 0)
     }
 }
