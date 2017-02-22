@@ -720,13 +720,15 @@ class StartGameScene: SKScene {
     }
     
     func LoadHighScore() -> HighScore! {
-        let score : HighScore = (NSKeyedUnarchiver.unarchiveObject(withFile: HighScore.ArchiveURL.path) as? HighScore)!
-        
-        if(score != nil) {
-            return score
-        } else {
+        do {
+            if let score : HighScore = try (NSKeyedUnarchiver.unarchiveObject(withFile: HighScore.ArchiveURL.path) as? HighScore) {
+                return score;
+            }
+        } catch {
             return HighScore(highScore: 0)
         }
+        
+        return HighScore(highScore: 0)
     }
     
     
