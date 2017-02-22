@@ -451,6 +451,13 @@ class StartGameScene: SKScene {
             player.physicsBody?.angularVelocity = 0
             player.physicsBody?.affectedByGravity = false
             pauseBtnClicked = false
+            
+            let touchBegan = self.childNode(withName: "touchBegan")
+            touchBegan?.removeFromParent()
+            JumpArrow.zPosition = -4
+            player.size.height = playerHeight
+            setPlayerPhysicsBody()
+            JumpArrow.size.height = 0
         }
         
         if(resumeBtnClicked) {

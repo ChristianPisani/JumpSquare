@@ -309,6 +309,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="iEr-Iq-ZEw" secondAttribute="bottom" id="3wm-Vg-XGW"/>
                                     <constraint firstItem="4Hl-eL-6Vj" firstAttribute="leading" secondItem="iEr-Iq-ZEw" secondAttribute="leading" id="8ED-L8-QcK"/>
@@ -377,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQE-dU-pwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2705" y="581"/>
+            <point key="canvasLocation" x="2704.8000000000002" y="580.65967016491754"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ryS-RI-pQD">
