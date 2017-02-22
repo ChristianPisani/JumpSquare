@@ -27,6 +27,13 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let request = GADRequest()
+        request.testDevices = [kGADSimulatorID]
+        GoogleAdBannerView.delegate = self
+        GoogleAdBannerView.adUnitID = "ca-app-pub-1460994528133368/6355604738"
+        GoogleAdBannerView.rootViewController = self
+        GoogleAdBannerView.load(request)
+        
         scene = SKScene(size: animationSKView.frame.size)
         animationSKView.showsFPS = false
         animationSKView.showsNodeCount = false
@@ -38,7 +45,8 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
         obs1.size = CGSize(width: obs1pos.frame.width, height: animationSKView.frame.height/2 - spaceBetweenObstacles/2)
         obs2.size = CGSize(width: obs2pos.frame.width, height: animationSKView.frame.height/2 - spaceBetweenObstacles/2)
         
-        playerIcon = SKSpriteNode(color: UIColor.red, size: playerPos.bounds.size)
+        playerPos.isHidden = true;
+        playerIcon = SKSpriteNode(color: playerPos.backgroundColor!, size: playerPos.bounds.size)
         playerIcon.anchorPoint = CGPoint(x: 0.5, y: 0)
         playerIcon.run(SKAction.move(to: CGPoint(x: self.view.frame.midX, y: playerPos.bounds.minY),
             duration: TimeInterval(0)))
