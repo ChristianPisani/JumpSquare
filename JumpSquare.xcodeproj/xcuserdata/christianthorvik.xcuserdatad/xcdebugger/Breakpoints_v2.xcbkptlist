@@ -230,11 +230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/GameScene.swift"
-            timestampString = "487171618.933206"
+            timestampString = "511446621.15096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
             landmarkName = "touchesMoved(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -246,11 +246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "490293327.387824"
+            timestampString = "509535588.632351"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "StartGameScene"
             landmarkType = "3">
          </BreakpointContent>
@@ -262,11 +262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "490377521.054502"
+            timestampString = "511446946.368617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "435"
-            endingLineNumber = "435"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -278,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "490377521.054502"
+            timestampString = "511446946.368617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
             landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -294,11 +294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/TutorialDragViewController.swift"
-            timestampString = "509475070.125932"
+            timestampString = "509539613.19657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "PlayerJumpWithPointer(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -310,11 +310,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "490377521.054502"
+            timestampString = "509536676.900702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "didMove(to:)"
             landmarkType = "7">
          </BreakpointContent>

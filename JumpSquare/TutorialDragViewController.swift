@@ -21,6 +21,8 @@ class TutorialDragViewController: UIViewController {
     var playerPos = CGPoint.zero
     var pointerSize = CGSize.zero
     
+    var page = 0
+    
     
     @IBOutlet weak var textView: UILabel!
     @IBOutlet weak var stepper: UIStepper!
@@ -31,8 +33,34 @@ class TutorialDragViewController: UIViewController {
     
     let spaceBetweenObstacles : CGFloat = 150
     
+    var origTxtViewPos : CGPoint = CGPoint()
+    
+    
+    
+    @IBAction func OnSwipeRight(_ sender: Any) {
+        if(stepper.value > 1) {
+            stepper.value -= 1
+            PageChange()
+        }
+    }
+    
+    
+    @IBAction func OnSwipeLeft(_ sender: Any) {
+        if(stepper.value < stepper.maximumValue) {
+            stepper.value += 1
+            PageChange()
+        }
+        
+        //PageChange()
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        origTxtViewPos = textView.frame.origin
         
         playerPos = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY - 140)
         pointerSize = CGSize(width: 50, height: 50)
@@ -67,6 +95,11 @@ class TutorialDragViewController: UIViewController {
     }
     
     @IBAction func onStepperChanged(_ sender: AnyObject) {
+        page = Int(stepper.value)
+        PageChange()
+    }
+    
+    func PageChange() {
         pageLabel.text = "Page " + String(Int(stepper.value))
         arrow.removeAllActions()
         playerIcon.removeAllActions()
@@ -80,6 +113,7 @@ class TutorialDragViewController: UIViewController {
         
         switch Int(stepper.value) {
         case 1:
+            textView.frame.origin = origTxtViewPos
             textView.text = "Drag to change the direction and strength of your jump"
             
             pointer.size = pointerSize
@@ -97,6 +131,7 @@ class TutorialDragViewController: UIViewController {
             movePointer(1, from: CGPoint(x: self.view.frame.midX + 40, y: self.view.frame.midY + 80),
                         to: CGPoint(x: self.view.frame.midX - 40, y: self.view.frame.midY + 40), completion:  { return } )
         case 2:
+            textView.frame.origin = origTxtViewPos
             textView.text = "Let go after dragging to make the player jump"
             
             pointer.size = pointerSize
@@ -115,6 +150,7 @@ class TutorialDragViewController: UIViewController {
                         to: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY + 40),
                         completion: { self.PlayerJumpWithPointer(0.5) } )
         case 3:
+            textView.frame.origin = origTxtViewPos
             textView.text = "If you fall, you can tap anywhere on the screen to get back up again"
             
             playerIcon.position = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY - 140)
@@ -125,9 +161,10 @@ class TutorialDragViewController: UIViewController {
             scene.addChild(playerIcon)
             
             clickPointer(0.5, from: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY + 80),
-                        to: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY + 80),
-                        completion: { self.PlayerRotate(0.5) } )
+                         to: CGPoint(x: self.view.frame.midX, y: self.view.frame.midY + 80),
+                         completion: { self.PlayerRotate(0.5) } )
         case 4:
+            textView.frame.origin = origTxtViewPos
             textView.text = "The goal of the game is to jump through the hoops"
             //textView.text = String(textView.frame.height)
             
@@ -142,6 +179,7 @@ class TutorialDragViewController: UIViewController {
             
             playerHoop(2)
         case 5:
+            textView.frame.origin = origTxtViewPos
             textView.text = "Remember that you can always move to the sides to get more space"
             
             pointer.size = pointerSize
@@ -157,6 +195,9 @@ class TutorialDragViewController: UIViewController {
             scene.addChild(playerIcon)
             
             self.PlayerSlide(0.5)
+        case 6:
+            textView.text = "Remember, if you land on your head, you won't know where you are jumping!"
+            
         default:
             return
         }

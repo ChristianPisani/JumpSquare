@@ -17,8 +17,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     @IBOutlet weak var resumeButton: UIButton!
     @IBOutlet weak var quitButton: UIButton!
     
-    @IBOutlet weak var PlayerTemplate: UIImageView!
-    
     
     var scene = StartGameScene(size: CGSize.zero)
     

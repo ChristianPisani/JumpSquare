@@ -71,6 +71,7 @@ class StartGameScene: SKScene {
     var ground : SKSpriteNode = SKSpriteNode()
     var face : SKSpriteNode = SKSpriteNode()
     var JumpArrow : SKSpriteNode = SKSpriteNode()
+    var JumpArrow_head : SKSpriteNode = SKSpriteNode()
     
     var playerHeight : CGFloat = 100
     var playerWidth : CGFloat = 60
@@ -230,7 +231,7 @@ class StartGameScene: SKScene {
         
         player = SKSpriteNode()
         player.name = "Bob"
-        player.color = UIColor(red: 255, green: 0, blue: 0, alpha: 255)
+        player.color = UIColor(red: 203/255, green: 37/255, blue: 0, alpha: 1)
         player.size = CGSize(width: playerWidth, height: playerHeight)
         player.position = CGPoint(x:10000, y:10000)
         player.physicsBody = SKPhysicsBody(rectangleOf: player.frame.size)
@@ -245,12 +246,18 @@ class StartGameScene: SKScene {
         face.position = CGPoint(x: 10, y: 20)
         player.addChild(face)
         
-        JumpArrow = SKSpriteNode(imageNamed: "Arrow")
-        JumpArrow.size = CGSize(width: 50, height: 80)
+        JumpArrow = SKSpriteNode(imageNamed: "Arrow_shaft")
+        JumpArrow.size = CGSize(width: 15, height: 80)
         JumpArrow.position = CGPoint(x: 0,
             y: (player.size.height/2) + 5)
         JumpArrow.anchorPoint = CGPoint(x: 0.5, y: 0)
         player.addChild(JumpArrow)
+        JumpArrow_head = SKSpriteNode(imageNamed: "Arrow_head")
+        JumpArrow_head.size = CGSize(width: 30, height: 30)
+        JumpArrow_head.anchorPoint = CGPoint(x: 0.5, y: 0)
+        JumpArrow_head.position = CGPoint(x: 0, y: 0)
+        JumpArrow.addChild(JumpArrow_head)
+        
         
         obs.name = "Obstacle"
         obs.color = UIColor(red: 0, green: 0, blue: 0, alpha: 255)
@@ -308,7 +315,7 @@ class StartGameScene: SKScene {
             touchBegan.size = CGSize(width: 20, height: 20)
             self.addChild(touchBegan)
             
-            JumpArrow.zPosition = 1
+            JumpArrow_head.position = CGPoint(x: 0, y: 0)
         }
     }
     
@@ -348,11 +355,17 @@ class StartGameScene: SKScene {
                         dy: -(touch.location(in: self).y - touchBegan.position.y)*1.0)
                     
                     JumpArrow.size.height = (sqrt(dragVector.dy*dragVector.dy + dragVector.dx*dragVector.dx))/2
-                    
+                    JumpArrow_head.position = CGPoint(x: 0, y: JumpArrow.size.height)
+                
+                    if(JumpArrow.size.height > 6) {
+                        JumpArrow.zPosition = 1
+                    }
+                
                     let JumpArrowNormalized = normalize(double2(Double(dragVector.dx), Double(dragVector.dy)))
                     
                     JumpArrow.zRotation = -atan2(CGFloat(JumpArrowNormalized.x), CGFloat(JumpArrowNormalized.y))
-                    //JumpArrow.position.x = touchBegan.position.x
+                
+                
             }
         }
     }
@@ -438,6 +451,7 @@ class StartGameScene: SKScene {
         //let b : SKSpriteNode = self.childNodeWithName("b") as! SKSpriteNode
         //b.position = screen.origin
         //b.size = screen.size
+        
         screen = screenSprite.frame
         
         if(pauseBtnClicked) {
