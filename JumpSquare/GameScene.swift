@@ -227,8 +227,6 @@ class GameScene: SKScene {
             touchBegan.color = UIColor(red: 255, green: 0, blue: 0, alpha: 0)
             touchBegan.size = CGSize(width: 20, height: 20)
             self.addChild(touchBegan)
-            
-            JumpArrow.zPosition = 1
         }
     }
     
@@ -263,6 +261,10 @@ class GameScene: SKScene {
                         dy: -(touch.location(in: self).y - touchBegan.position.y)*1.0)
                     
                     JumpArrow.size.height = (sqrt(dragVector.dy*dragVector.dy + dragVector.dx*dragVector.dx))/4
+                
+                    if(JumpArrow.size.height > 100) {
+                        //JumpArrow.zPosition = -10
+                    }
                     
                     let JumpArrowNormalized = normalize(double2(Double(dragVector.dx), Double(dragVector.dy)))
                     

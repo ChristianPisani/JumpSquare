@@ -22,16 +22,6 @@
 		BAF504091D4A349E00E9E68E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF504081D4A349E00E9E68E /* GoogleMobileAds.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		BAED3D061C5E5DED007326D9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BAED3CE51C5E5DED007326D9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BAED3CEC1C5E5DED007326D9;
-			remoteInfo = EndlessRunner;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		BA43E0E41D195B9400F43682 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		BA87240C1D0640FB0074B993 /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartGameScene.swift; sourceTree = "<group>"; };
@@ -60,13 +50,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BAED3D021C5E5DED007326D9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +65,6 @@
 			isa = PBXGroup;
 			children = (
 				BAED3CED1C5E5DED007326D9 /* JumpSquare.app */,
-				BAED3D051C5E5DED007326D9 /* JumpSquare.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -128,24 +110,6 @@
 			productReference = BAED3CED1C5E5DED007326D9 /* JumpSquare.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BAED3D041C5E5DED007326D9 /* JumpSquareTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BAED3D111C5E5DED007326D9 /* Build configuration list for PBXNativeTarget "JumpSquareTests" */;
-			buildPhases = (
-				BAED3D011C5E5DED007326D9 /* Sources */,
-				BAED3D021C5E5DED007326D9 /* Frameworks */,
-				BAED3D031C5E5DED007326D9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BAED3D071C5E5DED007326D9 /* PBXTargetDependency */,
-			);
-			name = JumpSquareTests;
-			productName = EndlessRunnerTests;
-			productReference = BAED3D051C5E5DED007326D9 /* JumpSquare.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -161,11 +125,6 @@
 						DevelopmentTeam = YUJYAY9KW8;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
-					};
-					BAED3D041C5E5DED007326D9 = {
-						CreatedOnToolsVersion = 7.2;
-						ProvisioningStyle = Manual;
-						TestTargetID = BAED3CEC1C5E5DED007326D9;
 					};
 				};
 			};
@@ -183,7 +142,6 @@
 			projectRoot = "";
 			targets = (
 				BAED3CEC1C5E5DED007326D9 /* JumpSquare */,
-				BAED3D041C5E5DED007326D9 /* JumpSquareTests */,
 			);
 		};
 /* End PBXProject section */
@@ -196,13 +154,6 @@
 				BAED3CFF1C5E5DED007326D9 /* LaunchScreen.storyboard in Resources */,
 				BAED3CFC1C5E5DED007326D9 /* Assets.xcassets in Resources */,
 				BAED3CFA1C5E5DED007326D9 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BAED3D031C5E5DED007326D9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,14 +184,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BAED3D071C5E5DED007326D9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BAED3CEC1C5E5DED007326D9 /* JumpSquare */;
-			targetProxy = BAED3D061C5E5DED007326D9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BAED3CF81C5E5DED007326D9 /* Main.storyboard */ = {
@@ -394,34 +337,6 @@
 			};
 			name = Release;
 		};
-		BAED3D121C5E5DED007326D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = EndlessRunnerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.EndlessRunnerTests;
-				PRODUCT_NAME = JumpSquare;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JumpSquare.app/JumpSquare";
-			};
-			name = Debug;
-		};
-		BAED3D131C5E5DED007326D9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = EndlessRunnerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.EndlessRunnerTests;
-				PRODUCT_NAME = JumpSquare;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JumpSquare.app/JumpSquare";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -439,15 +354,6 @@
 			buildConfigurations = (
 				BAED3D0F1C5E5DED007326D9 /* Debug */,
 				BAED3D101C5E5DED007326D9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BAED3D111C5E5DED007326D9 /* Build configuration list for PBXNativeTarget "JumpSquareTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BAED3D121C5E5DED007326D9 /* Debug */,
-				BAED3D131C5E5DED007326D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

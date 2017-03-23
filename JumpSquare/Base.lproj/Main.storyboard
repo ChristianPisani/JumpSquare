@@ -43,7 +43,7 @@
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Tw-8T-HVw">
                                                 <rect key="frame" x="169" y="290" width="37" height="62"/>
-                                                <color key="backgroundColor" red="0.79580012580000004" green="0.1466547819" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.79607843137254897" green="0.1466547819" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="37" id="afF-kS-2oe"/>
                                                     <constraint firstAttribute="height" constant="62" id="ual-Iz-Pnq"/>
@@ -244,14 +244,6 @@
                                     <constraint firstAttribute="width" constant="320" id="Kip-l5-bqq"/>
                                 </constraints>
                             </view>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IYx-4V-o7b">
-                                <rect key="frame" x="113" y="494" width="37" height="62"/>
-                                <color key="backgroundColor" red="0.79580012580000004" green="0.1466547819" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="37" id="VL1-Ym-yuv"/>
-                                    <constraint firstAttribute="height" constant="62" id="ssP-hu-cdB"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.84313725490000002" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -270,7 +262,6 @@
                     <navigationItem key="navigationItem" id="n5M-U9-n9M"/>
                     <connections>
                         <outlet property="GoogleAdBannerView" destination="erR-IK-X1B" id="22Y-Ay-aXs"/>
-                        <outlet property="PlayerTemplate" destination="IYx-4V-o7b" id="BAf-gE-Ks4"/>
                         <outlet property="pauseButton" destination="Yw2-MG-gi3" id="f7q-6X-AAi"/>
                         <outlet property="quitButton" destination="AIo-IZ-KfH" id="34j-5A-s1H"/>
                         <outlet property="resumeButton" destination="91O-K0-oB9" id="DFI-kV-fCl"/>
@@ -309,6 +300,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="iEr-Iq-ZEw" secondAttribute="bottom" id="3wm-Vg-XGW"/>
                                     <constraint firstItem="4Hl-eL-6Vj" firstAttribute="leading" secondItem="iEr-Iq-ZEw" secondAttribute="leading" id="8ED-L8-QcK"/>
@@ -316,6 +308,10 @@
                                     <constraint firstItem="4Hl-eL-6Vj" firstAttribute="top" secondItem="bjh-hC-Ngd" secondAttribute="top" id="msl-L8-WB5"/>
                                     <constraint firstItem="4Hl-eL-6Vj" firstAttribute="centerX" secondItem="bjh-hC-Ngd" secondAttribute="centerX" id="oP8-io-PUd"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="nfb-Bb-vUN" appends="YES" id="9ZT-ch-YcA"/>
+                                    <outletCollection property="gestureRecognizers" destination="aks-AK-K1x" appends="YES" id="lJH-IP-M3W"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drag to change the direction and strength of your jump" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4q-vT-W3Q">
                                 <rect key="frame" x="0.0" y="550" width="375" height="73"/>
@@ -376,8 +372,18 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eQE-dU-pwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="nfb-Bb-vUN">
+                    <connections>
+                        <action selector="OnSwipeRight:" destination="SwO-Zg-OPq" id="uCH-Yb-zDw"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="aks-AK-K1x">
+                    <connections>
+                        <action selector="OnSwipeLeft:" destination="SwO-Zg-OPq" id="DmM-Ve-lwX"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2705" y="581"/>
+            <point key="canvasLocation" x="2704.8000000000002" y="580.65967016491754"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ryS-RI-pQD">
