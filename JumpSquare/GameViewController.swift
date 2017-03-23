@@ -9,6 +9,8 @@
 import UIKit
 import SpriteKit
 import GoogleMobileAds
+import AVFoundation
+
 
 class GameViewController: UIViewController, GADBannerViewDelegate {
 
@@ -19,6 +21,9 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     
     
     var scene = StartGameScene(size: CGSize.zero)
+    var player = AVAudioPlayer()
+    let audioPath = Bundle.main.path(forResource: "music", ofType: "mp3")
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +50,12 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         scene.gameViewController = self
         skView.presentScene(scene)
         //skView.showsFPS = true
+        do {
+            try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath : audioPath!))
+            player.play()
+        }catch{
+            
+        }
     }
     
     
@@ -53,6 +64,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         scene.pauseBtnClicked = true
         resumeButton.isHidden = false
         quitButton.isHidden = false
+        player.pause()
     }
     
     
@@ -61,6 +73,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         scene.resumeBtnClicked = true
         resumeButton.isHidden = true
         quitButton.isHidden = true
+        player.play()
     }
     
     @IBAction func quitBtnClicked(_ sender: AnyObject) {
@@ -69,6 +82,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         self.scene.removeAllActions()
         self.scene.removeFromParent()
         self.scene.removeAllChildren()
+        player.stop()
     }
 
     override var prefersStatusBarHidden : Bool {

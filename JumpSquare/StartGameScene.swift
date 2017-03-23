@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import AVFoundation
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -38,6 +39,9 @@ class StartGameScene: SKScene {
     
     
     weak var gameViewController : GameViewController?
+    
+    var audioPlayer = AVAudioPlayer()
+    let audioPath = Bundle.main.path(forResource: "music", ofType: "mp3")
     
     var pointAwarded = false
     var score = 0
@@ -300,6 +304,13 @@ class StartGameScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
+        
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath : audioPath!))
+            //audioPlayer.play()
+        }catch{
+            
+        }
         
         if(gamePaused) {
             return

@@ -20,6 +20,8 @@
 		BAED6C071D34382800C4253B /* TutorialDragViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED6C061D34382800C4253B /* TutorialDragViewController.swift */; };
 		BAED6C091D358F4400C4253B /* StartMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED6C081D358F4400C4253B /* StartMenuViewController.swift */; };
 		BAF504091D4A349E00E9E68E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF504081D4A349E00E9E68E /* GoogleMobileAds.framework */; };
+		DD65BA6E1E847FD60079D05B /* beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = DD65BA6C1E847FD60079D05B /* beep.aif */; };
+		DD65BA6F1E847FD60079D05B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD65BA6D1E847FD60079D05B /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,11 +36,12 @@
 		BAED3CFB1C5E5DED007326D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BAED3CFE1C5E5DED007326D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BAED3D001C5E5DED007326D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BAED3D051C5E5DED007326D9 /* JumpSquare.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JumpSquare.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAED6C041D341F1800C4253B /* Popup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		BAED6C061D34382800C4253B /* TutorialDragViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialDragViewController.swift; sourceTree = "<group>"; };
 		BAED6C081D358F4400C4253B /* StartMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartMenuViewController.swift; sourceTree = "<group>"; };
 		BAF504081D4A349E00E9E68E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = ../GoogleMobileAds.framework; sourceTree = "<group>"; };
+		DD65BA6C1E847FD60079D05B /* beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.aif; sourceTree = "<group>"; };
+		DD65BA6D1E847FD60079D05B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 				BAED6C041D341F1800C4253B /* Popup.swift */,
 				BAED3CFB1C5E5DED007326D9 /* Assets.xcassets */,
 				BA43E0E41D195B9400F43682 /* Button.swift */,
+				DD65BA6C1E847FD60079D05B /* beep.aif */,
+				DD65BA6D1E847FD60079D05B /* music.mp3 */,
 				BAED3CFD1C5E5DED007326D9 /* LaunchScreen.storyboard */,
 				BAED3D001C5E5DED007326D9 /* Info.plist */,
 				BAE32D3A1C622DD10023D033 /* HighScore.swift */,
@@ -151,8 +156,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD65BA6F1E847FD60079D05B /* music.mp3 in Resources */,
 				BAED3CFF1C5E5DED007326D9 /* LaunchScreen.storyboard in Resources */,
 				BAED3CFC1C5E5DED007326D9 /* Assets.xcassets in Resources */,
+				DD65BA6E1E847FD60079D05B /* beep.aif in Resources */,
 				BAED3CFA1C5E5DED007326D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -173,13 +180,6 @@
 				BA87240D1D0640FB0074B993 /* StartGameScene.swift in Sources */,
 				BAE32D3B1C622DD10023D033 /* HighScore.swift in Sources */,
 				BAED3CF11C5E5DED007326D9 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BAED3D011C5E5DED007326D9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
