@@ -33,6 +33,8 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = true;
+        
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID]
         GoogleAdBannerView.delegate = self

@@ -246,28 +246,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "509535588.632351"
+            timestampString = "518469543.293712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "StartGameScene"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "511446946.368617"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "448"
-            endingLineNumber = "448"
-            landmarkName = "update(_:)"
+            startingLineNumber = "472"
+            endingLineNumber = "472"
+            landmarkName = "touchesEnded(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -278,12 +262,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "511446946.368617"
+            timestampString = "518469543.293712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
-            landmarkName = "update(_:)"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
+            landmarkName = "touchesEnded(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -294,11 +278,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/TutorialDragViewController.swift"
-            timestampString = "509539613.19657"
+            timestampString = "512303993.775729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "PlayerJumpWithPointer(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -310,12 +294,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JumpSquare/StartGameScene.swift"
-            timestampString = "509536676.900702"
+            timestampString = "518469543.293712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "didMove(to:)"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "setUpGroundAndObstacles()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

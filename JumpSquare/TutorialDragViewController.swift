@@ -30,6 +30,8 @@ class TutorialDragViewController: UIViewController {
     @IBOutlet weak var obs1Pos: UIImageView!
     @IBOutlet weak var obs2Pos: UIImageView!
     @IBOutlet weak var tutView: UIView!
+    @IBOutlet weak var PageControl: UIPageControl!
+    
     
     let spaceBetweenObstacles : CGFloat = 150
     
@@ -59,6 +61,8 @@ class TutorialDragViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false;
         
         origTxtViewPos = textView.frame.origin
         
@@ -100,6 +104,7 @@ class TutorialDragViewController: UIViewController {
     }
     
     func PageChange() {
+        PageControl.currentPage = Int(stepper.value-1);
         pageLabel.text = "Page " + String(Int(stepper.value))
         arrow.removeAllActions()
         playerIcon.removeAllActions()

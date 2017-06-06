@@ -28,7 +28,6 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         let request = GADRequest()
         request.testDevices = [kGADSimulatorID]
         GoogleAdBannerView.delegate = self
