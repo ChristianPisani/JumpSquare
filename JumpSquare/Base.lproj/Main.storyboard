@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0QG-K9-Dfy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZWh-GT-ptN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -106,12 +106,20 @@
                                         <rect key="frame" x="27" y="617" width="320" height="50"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDP-oS-unX">
+                                        <rect key="frame" x="150" y="569" width="74" height="30"/>
+                                        <state key="normal" title="Skin Editor"/>
+                                        <connections>
+                                            <segue destination="0QG-K9-Dfy" kind="show" id="9MR-Ya-hWw"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="aoP-Ah-qQk" firstAttribute="trailing" secondItem="e2q-iD-9cF" secondAttribute="trailing" id="6Wv-mH-OMU"/>
                                     <constraint firstItem="PjZ-HF-gPY" firstAttribute="leading" secondItem="aoP-Ah-qQk" secondAttribute="leading" id="Gzr-kp-pia"/>
                                     <constraint firstItem="e2q-iD-9cF" firstAttribute="top" secondItem="aoP-Ah-qQk" secondAttribute="bottom" constant="15" id="IyS-Ur-VsW"/>
+                                    <constraint firstItem="oDP-oS-unX" firstAttribute="centerX" secondItem="rCm-P8-ybs" secondAttribute="centerX" id="LbB-YS-hg5"/>
                                     <constraint firstItem="yLZ-QC-uuf" firstAttribute="leading" secondItem="rCm-P8-ybs" secondAttribute="leading" constant="27" id="QeQ-EI-h3j"/>
                                     <constraint firstAttribute="bottom" secondItem="e2q-iD-9cF" secondAttribute="bottom" constant="106" id="RH5-U2-C6h"/>
                                     <constraint firstAttribute="bottom" secondItem="yLZ-QC-uuf" secondAttribute="bottom" id="XwV-1p-bVJ"/>
@@ -123,6 +131,7 @@
                                     <constraint firstItem="PjZ-HF-gPY" firstAttribute="trailing" secondItem="aoP-Ah-qQk" secondAttribute="trailing" id="kFm-ke-Lsh"/>
                                     <constraint firstItem="yLZ-QC-uuf" firstAttribute="top" secondItem="e2q-iD-9cF" secondAttribute="bottom" constant="56" id="n7n-2W-nT6"/>
                                     <constraint firstItem="yLZ-QC-uuf" firstAttribute="centerX" secondItem="e2q-iD-9cF" secondAttribute="centerX" id="sem-zl-wu6"/>
+                                    <constraint firstItem="oDP-oS-unX" firstAttribute="top" secondItem="e2q-iD-9cF" secondAttribute="bottom" constant="8" id="zh2-UF-3aR"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -158,7 +167,23 @@
                     <view key="view" contentMode="scaleToFill" id="hbs-o8-kS1" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAS-Pa-Sn2">
+                                <rect key="frame" x="164" y="629" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="iyS-cb-kAT"/>
+                                </constraints>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="BackBtnClicked:" destination="0QG-K9-Dfy" eventType="touchUpInside" id="xTm-rb-ToM"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.84313725490000002" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lAS-Pa-Sn2" firstAttribute="centerX" secondItem="hbs-o8-kS1" secondAttribute="centerX" id="M6p-bl-aYs"/>
+                            <constraint firstItem="by8-A7-2xL" firstAttribute="top" secondItem="lAS-Pa-Sn2" secondAttribute="bottom" constant="8" symbolic="YES" id="Wto-NQ-x9x"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Change Skin" id="7B8-EH-lPa"/>
                 </viewController>

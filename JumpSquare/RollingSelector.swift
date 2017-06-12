@@ -14,7 +14,7 @@ class RollingSelector {
     //var colors : [UIColor] = [.red, .blue, .purple, .black, .white]
     var textures = [SKSpriteNode]()
     var size : CGSize
-    var itemIndex = 0
+    var itemIndex : Int
     
     var animating = false
     
@@ -26,11 +26,17 @@ class RollingSelector {
     
     var offsetY : CGFloat = 0
     
-    init(player: SKSpriteNode, view : SKView, name : String, offsetY : CGFloat, size : CGSize) {
+    init(player: SKSpriteNode, view : SKView, name : String, offsetY : CGFloat, size : CGSize, index: Int = 0) {
         self.player = player
         self.view = view
         self.offsetY = offsetY
         self.size = size
+        self.itemIndex = index
+        
+        let d = SKSpriteNode()
+        d.texture?.filteringMode = .nearest
+        d.texture = nil
+        textures.append(d)
         
         for i in 1...3 {
             let t : SKSpriteNode = SKSpriteNode(imageNamed: name + "_" + String(describing: i))
@@ -40,19 +46,19 @@ class RollingSelector {
             //}
         }
         
-        let item = SKSpriteNode(color: .red, size: .zero)
+        let item = SKSpriteNode()
         item.size = size
         item.anchorPoint = CGPoint(x: 0.5, y: 0)
         items.append(item)
         player.addChild(items[0])
         
-        let leftitem = SKSpriteNode(color: .blue, size: .zero)
+        let leftitem = SKSpriteNode()
         leftitem.size = item.size
         leftitem.anchorPoint = item.anchorPoint
         items.append(leftitem)
         player.addChild(items[1])
         
-        let rightitem = SKSpriteNode(color: .purple, size: .zero)
+        let rightitem = SKSpriteNode()
         rightitem.size = CGSize(width: item.size.width, height: item.size.height + 15)
         rightitem.anchorPoint = item.anchorPoint
         items.append(rightitem)

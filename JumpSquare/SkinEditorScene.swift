@@ -25,6 +25,8 @@ class SkinEditorScene: SKScene {
     var swipeLeft = UISwipeGestureRecognizer()
     var swipeRight = UISwipeGestureRecognizer()
     
+    var skinSave : SkinSave?
+    
     lazy var hatSelector : RollingSelector = {
         let height = self.player.frame.height*0.15
         let width = self.player.frame.width+4
@@ -54,7 +56,16 @@ class SkinEditorScene: SKScene {
         
         //setUpHats()
         let h = hatSelector
-        //let c = coatSelector
+        let c = coatSelector
+        
+        skinSave = SkinEditorScene.LoadSkin();
+        if(skinSave != nil) {
+            hatSelector.itemIndex = skinSave!.hat
+            coatSelector.itemIndex = skinSave!.coat
+            hatSelector.resetItems()
+            coatSelector.resetItems()
+            //print(String(describing: skinSave!.hat) +  " : " + String(describing: skinSave!.coat))
+        }
         
         swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
         swipeRight.direction = .right
@@ -64,6 +75,28 @@ class SkinEditorScene: SKScene {
         swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
         swipeLeft.direction = .left
         view.addGestureRecognizer(swipeLeft)
+    }
+    
+    func SaveSkin() {
+        skinSave = SkinSave(hat: hatSelector.itemIndex, coat: coatSelector.itemIndex)
+        print("Save: "  + String(describing: skinSave!.hat) + " : " + String(describing: skinSave!.coat))
+        
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(skinSave, toFile: SkinSave.ArchiveURL.path)
+        
+        if(!isSuccessfulSave) {
+            print("Failed to save")
+        }
+        print("Succesful save")
+    }
+    
+    static func LoadSkin() -> SkinSave? {
+        
+        do {
+            let save : SkinSave = try NSKeyedUnarchiver.unarchiveObject(withFile: SkinSave.ArchiveURL.path) as! SkinSave
+            return save
+        }
+        
+        return SkinSave(hat: 0, coat: 0)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -79,18 +112,22 @@ class SkinEditorScene: SKScene {
             
             if(hatSelector.arrow_left.frame.contains(location)) {
                 hatSelector.arrow_left_clicked()
+                SaveSkin()
             }
             
             if(hatSelector.arrow_right.frame.contains(location)) {
                 hatSelector.arrow_right_clicked()
+                SaveSkin()
             }
             
             if(coatSelector.arrow_left.frame.contains(location)) {
                 coatSelector.arrow_left_clicked()
+                SaveSkin()
             }
             
             if(coatSelector.arrow_right.frame.contains(location)) {
                 coatSelector.arrow_right_clicked()
+                SaveSkin()
             }
         }
     }

@@ -67,11 +67,13 @@ class StartGameScene: SKScene {
     var JumpArrow : SKSpriteNode = SKSpriteNode()
     var JumpArrow_head : SKSpriteNode = SKSpriteNode()
     var playerHat : SKSpriteNode = SKSpriteNode()
-    var playerJacket : SKSpriteNode = SKSpriteNode()
+    var playerCoat : SKSpriteNode = SKSpriteNode()
     
     var playerHeight : CGFloat = 100
     var playerWidth : CGFloat = 60
     var playerSpawnOffSet : CGFloat = 50
+    
+    var skin = SkinSave(hat: 0, coat: 0)
     
     // MARK : Screen properties
     
@@ -303,15 +305,30 @@ class StartGameScene: SKScene {
         face.position = CGPoint(x: 10, y: 20)
         player.addChild(face)
         
-        playerHat = SKSpriteNode(imageNamed: "Arrow_shaft")
-        playerHat.size = CGSize(width: playerWidth + 4, height: 25)
-        playerHat.position = CGPoint(x: 0, y: 45)
+        
+        skin = SkinEditorScene.LoadSkin()
+        if  (skin == nil) {
+            skin = SkinSave(hat: 0, coat: 0)
+        }
+        if(skin?.hat != 0) {
+            playerHat = SKSpriteNode(imageNamed: "hat_" + String(describing: skin!.hat))
+        } else {
+            playerHat = SKSpriteNode()
+        }
+        let size = playerWidth + 4
+        playerHat.size = CGSize(width: size, height: size)
+        playerHat.position = CGPoint(x: 0, y: player.size.height/2 + 20)
         player.addChild(playerHat)
         
-        playerJacket = SKSpriteNode(imageNamed: "Arrow_shaft")
-        playerJacket.size = CGSize(width: playerWidth + 4, height: 60)
-        playerJacket.position = CGPoint(x: 0, y: -30)
-        //player.addChild(playerJacket)
+        if(skin?.coat != 0) {
+            playerCoat = SKSpriteNode(imageNamed: "coat_" + String(describing: skin!.coat))
+        } else {
+            playerCoat = SKSpriteNode()
+        }
+        playerCoat.size = CGSize(width: playerWidth, height: 60)
+        playerCoat.anchorPoint = CGPoint(x: 0.5, y: 0)
+        playerCoat.position = CGPoint(x: 0, y: -player.frame.size.height/2)
+        player.addChild(playerCoat)
         
         JumpArrow = SKSpriteNode(imageNamed: "Arrow_shaft")
         JumpArrow.size = CGSize(width: 15, height: 80)

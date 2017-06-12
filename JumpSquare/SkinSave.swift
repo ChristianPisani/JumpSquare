@@ -10,14 +10,14 @@ import UIKit
 
 class SkinSave: NSObject, NSCoding {
     // MARK : Property
-    var coat = ""
-    var hat = ""
+    var coat : Int = 0
+    var hat : Int = 0
     
     // MARK : Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("skinsave")
     
-    init?(hat: String, coat: String) {
+    init?(hat: Int, coat: Int) {
         self.coat = coat
         self.hat = hat
         
@@ -32,20 +32,18 @@ class SkinSave: NSObject, NSCoding {
     
     // MARK : NSCoding
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(coat, forKey: PropertyKey.hatKey)
+        print("saving: " + String(describing: hat) + " : " + String(describing: coat))
+        print(SkinSave.ArchiveURL.path)
+        aCoder.encode(hat, forKey: PropertyKey.hatKey)
         aCoder.encode(coat, forKey: PropertyKey.coatKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        do {
-            if let loadCoat = aDecoder.decodeObject(forKey: PropertyKey.coatKey) as? String {
-                
-                if let loadHat = aDecoder.decodeObject(forKey: PropertyKey.hatKey) as? String {
-                    self.init(hat: loadHat, coat: loadCoat)
-                    return
-                }
-            }
-        }
-        self.init(hat: "", coat: "")
+        
+        let loadHat = aDecoder.decodeInteger(forKey: PropertyKey.hatKey)
+        let loadCoat = aDecoder.decodeInteger(forKey: PropertyKey.coatKey)
+        
+        self.init(hat: loadHat, coat: loadCoat)
+        return
     }
 }

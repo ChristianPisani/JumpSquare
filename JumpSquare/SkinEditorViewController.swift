@@ -12,12 +12,14 @@ import SpriteKit
 class SkinEditorViewController: UIViewController {
     
     
-    
+    var scene = SkinEditorScene(size: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
 
-        let scene = SkinEditorScene(size: view.bounds.size)
+        scene = SkinEditorScene(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = false
         skView.showsNodeCount = false
@@ -36,6 +38,15 @@ class SkinEditorViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func BackBtnClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.isNavigationBarHidden = false
+        self.scene.removeAllActions()
+        self.scene.removeFromParent()
+        self.scene.removeAllChildren()
     }
     
     
