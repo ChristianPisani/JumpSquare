@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA43E0E51D195B9400F43682 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA43E0E41D195B9400F43682 /* Button.swift */; };
+		BA7C6BA71EEB1A96001E42E2 /* RollingSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C6BA61EEB1A96001E42E2 /* RollingSelector.swift */; };
 		BA87240D1D0640FB0074B993 /* StartGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA87240C1D0640FB0074B993 /* StartGameScene.swift */; };
 		BAE32D3B1C622DD10023D033 /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE32D3A1C622DD10023D033 /* HighScore.swift */; };
 		BAED3CF11C5E5DED007326D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED3CF01C5E5DED007326D9 /* AppDelegate.swift */; };
@@ -21,12 +22,14 @@
 		BAF1C8861EE739FE009083BB /* SkinEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1C8851EE739FE009083BB /* SkinEditorViewController.swift */; };
 		BAF1C8881EE752A4009083BB /* SkinEditorScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF1C8871EE752A4009083BB /* SkinEditorScene.swift */; };
 		BAF504091D4A349E00E9E68E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF504081D4A349E00E9E68E /* GoogleMobileAds.framework */; };
+		BAF80FA21EEDAEC1000CA0CF /* SkinSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF80FA11EEDAEC1000CA0CF /* SkinSave.swift */; };
 		DD65BA6E1E847FD60079D05B /* beep.aif in Resources */ = {isa = PBXBuildFile; fileRef = DD65BA6C1E847FD60079D05B /* beep.aif */; };
 		DD65BA6F1E847FD60079D05B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD65BA6D1E847FD60079D05B /* music.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BA43E0E41D195B9400F43682 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		BA7C6BA61EEB1A96001E42E2 /* RollingSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RollingSelector.swift; sourceTree = "<group>"; };
 		BA87240C1D0640FB0074B993 /* StartGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartGameScene.swift; sourceTree = "<group>"; };
 		BAE32D3A1C622DD10023D033 /* HighScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
 		BAED3CED1C5E5DED007326D9 /* JumpSquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JumpSquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +45,7 @@
 		BAF1C8851EE739FE009083BB /* SkinEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinEditorViewController.swift; sourceTree = "<group>"; };
 		BAF1C8871EE752A4009083BB /* SkinEditorScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinEditorScene.swift; sourceTree = "<group>"; };
 		BAF504081D4A349E00E9E68E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = ../GoogleMobileAds.framework; sourceTree = "<group>"; };
+		BAF80FA11EEDAEC1000CA0CF /* SkinSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkinSave.swift; sourceTree = "<group>"; };
 		DD65BA6C1E847FD60079D05B /* beep.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.aif; sourceTree = "<group>"; };
 		DD65BA6D1E847FD60079D05B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +98,8 @@
 				BAE32D3A1C622DD10023D033 /* HighScore.swift */,
 				BAF1C8851EE739FE009083BB /* SkinEditorViewController.swift */,
 				BAF1C8871EE752A4009083BB /* SkinEditorScene.swift */,
+				BA7C6BA61EEB1A96001E42E2 /* RollingSelector.swift */,
+				BAF80FA11EEDAEC1000CA0CF /* SkinSave.swift */,
 			);
 			path = JumpSquare;
 			sourceTree = "<group>";
@@ -179,7 +185,9 @@
 				BAED6C051D341F1800C4253B /* Popup.swift in Sources */,
 				BA43E0E51D195B9400F43682 /* Button.swift in Sources */,
 				BAED6C091D358F4400C4253B /* StartMenuViewController.swift in Sources */,
+				BA7C6BA71EEB1A96001E42E2 /* RollingSelector.swift in Sources */,
 				BAED3CF71C5E5DED007326D9 /* GameViewController.swift in Sources */,
+				BAF80FA21EEDAEC1000CA0CF /* SkinSave.swift in Sources */,
 				BA87240D1D0640FB0074B993 /* StartGameScene.swift in Sources */,
 				BAF1C8861EE739FE009083BB /* SkinEditorViewController.swift in Sources */,
 				BAE32D3B1C622DD10023D033 /* HighScore.swift in Sources */,

@@ -11,35 +11,59 @@ import SpriteKit
 
 class SkinEditorScene: SKScene {
 
-    var hat : SKSpriteNode = SKSpriteNode()
+    var hats = [SKSpriteNode]()
     
     var arrow_hat_right = SKSpriteNode()
     var arrow_hat_left = SKSpriteNode()
     var player = SKSpriteNode()
     
+    var animating = false
+    
+    var colors : [UIColor] = [.red, .blue, .purple, .black, .white]
+    var hatIndex = 0
+    
+    var swipeLeft = UISwipeGestureRecognizer()
+    var swipeRight = UISwipeGestureRecognizer()
+    
+    lazy var hatSelector : RollingSelector = {
+        let height = self.player.frame.height*0.15
+        let width = self.player.frame.width+4
+        return RollingSelector(player: self.player, view: self.view!, name: "hat",
+                               offsetY: (self.player.frame.height/2) - height,
+                               size: CGSize(width: width, height: width))
+    }()
+    
+    lazy var coatSelector : RollingSelector = {
+        return RollingSelector(player: self.player, view: self.view!, name: "coat",
+                               offsetY: -(self.player.frame.height/2),
+                               size: CGSize(width: self.player.frame.width, height: self.player.frame.height * 0.55))
+    }()
+    
     override func didMove(to view: SKView) {
-        let playerWidth = view.bounds.width/4
+        let playerWidth = view.bounds.width/2
         player = SKSpriteNode(color: .red, size: CGSize(width: playerWidth, height: playerWidth*1.5))
         player.position.x = frame.midX
         player.position.y = frame.midY
         addChild(player);
         
-        hat = SKSpriteNode(imageNamed: "Arrow_shaft")
-        hat.size = CGSize(width: playerWidth + 4, height: 25)
-        hat.position = CGPoint(x: 0, y: 45)
-        player.addChild(hat)
+        let face = SKSpriteNode(imageNamed: "Smile")
+        let smilesize = playerWidth*0.8
+        face.size = CGSize(width: smilesize, height: smilesize)
+        face.position = CGPoint(x: 10, y: player.frame.height/6)
+        player.addChild(face)
         
-        var dst : CGFloat = 20 //Distance from player
-        arrow_hat_right = SKSpriteNode(imageNamed: "Arrow_head")
-        arrow_hat_right.position = CGPoint(x: player.frame.width/2 + dst, y: 0)
-        arrow_hat_right.size = CGSize(width: 20, height: 20)
-        arrow_hat_right.zRotation = -(.pi / 2)
-        arrow_hat_left = SKSpriteNode(imageNamed: "Arrow_head")
-        arrow_hat_left.position = CGPoint(x: -player.frame.width/2 - dst, y: 0)
-        arrow_hat_left.size = CGSize(width: 20, height: 20)
-        arrow_hat_left.zRotation = .pi / 2
-        player.addChild(arrow_hat_right)
-        player.addChild(arrow_hat_left)
+        //setUpHats()
+        let h = hatSelector
+        //let c = coatSelector
+        
+        swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        swipeRight.direction = .right
+        view.addGestureRecognizer(swipeRight)
+        
+        
+        swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -53,21 +77,41 @@ class SkinEditorScene: SKScene {
             touchBegan.size = CGSize(width: 20, height: 20)
             self.addChild(touchBegan)
             
-            if(arrow_hat_left.frame.contains(location)) {
-                arrow_hat_left_clicked()
+            if(hatSelector.arrow_left.frame.contains(location)) {
+                hatSelector.arrow_left_clicked()
             }
             
-            if(arrow_hat_right.frame.contains(location)) {
-                arrow_hat_right_clicked()
+            if(hatSelector.arrow_right.frame.contains(location)) {
+                hatSelector.arrow_right_clicked()
+            }
+            
+            if(coatSelector.arrow_left.frame.contains(location)) {
+                coatSelector.arrow_left_clicked()
+            }
+            
+            if(coatSelector.arrow_right.frame.contains(location)) {
+                coatSelector.arrow_right_clicked()
             }
         }
     }
     
-    func arrow_hat_right_clicked() {
-        hat.run(SKAction.move(by: CGVector(dx: 50, dy: 0), duration: TimeInterval(1)))
+    func swipedRight(sender:UISwipeGestureRecognizer){
+        if(hatSelector.containsPoint(point: swipeRight.location(in: view))) {
+            hatSelector.arrow_right_clicked()
+        }
+        
+        if(coatSelector.containsPoint(point: swipeRight.location(in: view))) {
+            coatSelector.arrow_right_clicked()
+        }
     }
     
-    func arrow_hat_left_clicked() {
-        hat.run(SKAction.move(by: CGVector(dx: -50, dy: 0), duration: TimeInterval(1)))
+    func swipedLeft(sender:UISwipeGestureRecognizer){
+        if(hatSelector.containsPoint(point: swipeLeft.location(in: view))) {
+            hatSelector.arrow_left_clicked()
+        }
+        
+        if(coatSelector.containsPoint(point: swipeLeft.location(in: view))) {
+            coatSelector.arrow_left_clicked()
+        }
     }
 }
