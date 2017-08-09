@@ -40,10 +40,14 @@ class SkinSave: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         
-        let loadHat = aDecoder.decodeInteger(forKey: PropertyKey.hatKey)
-        let loadCoat = aDecoder.decodeInteger(forKey: PropertyKey.coatKey)
+        let loadHat : Int? = aDecoder.decodeInteger(forKey: PropertyKey.hatKey)
+        let loadCoat : Int? = aDecoder.decodeInteger(forKey: PropertyKey.coatKey)
         
-        self.init(hat: loadHat, coat: loadCoat)
+        if(loadHat != nil && loadCoat != nil) {
+            self.init(hat: loadHat!, coat: loadCoat!)
+        } else {
+            self.init(hat: 0, coat: 0)
+        }
         return
     }
 }

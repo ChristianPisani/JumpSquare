@@ -72,6 +72,10 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
         //AnimatePlayer()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     func AwardPoint() {
         let popup = Popup()
         popup.position = CGPoint(x: 0, y: (obs2.frame.height/2) + (obs1.frame.minY - obs2.frame.maxY)/2 - 10)

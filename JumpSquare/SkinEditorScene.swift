@@ -91,6 +91,10 @@ class SkinEditorScene: SKScene {
     
     static func LoadSkin() -> SkinSave? {
         
+       /* if(!FileManager.default.fileExists(atPath: SkinSave.ArchiveURL.absoluteString)) {
+            return SkinSave(hat: 0, coat: 0)
+        }*/
+        
         do {
             let save : SkinSave = try NSKeyedUnarchiver.unarchiveObject(withFile: SkinSave.ArchiveURL.path) as! SkinSave
             return save
@@ -135,20 +139,24 @@ class SkinEditorScene: SKScene {
     func swipedRight(sender:UISwipeGestureRecognizer){
         if(hatSelector.containsPoint(point: swipeRight.location(in: view))) {
             hatSelector.arrow_right_clicked()
+            SaveSkin()
         }
         
         if(coatSelector.containsPoint(point: swipeRight.location(in: view))) {
             coatSelector.arrow_right_clicked()
+            SaveSkin()
         }
     }
     
     func swipedLeft(sender:UISwipeGestureRecognizer){
         if(hatSelector.containsPoint(point: swipeLeft.location(in: view))) {
             hatSelector.arrow_left_clicked()
+            SaveSkin()
         }
         
         if(coatSelector.containsPoint(point: swipeLeft.location(in: view))) {
             coatSelector.arrow_left_clicked()
+            SaveSkin()
         }
     }
 }

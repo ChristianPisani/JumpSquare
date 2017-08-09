@@ -98,6 +98,12 @@ class TutorialDragViewController: UIViewController {
                     to: CGPoint(x: self.view.frame.midX - 40, y: self.view.frame.midY + 40), completion:  { return } )
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
     @IBAction func onStepperChanged(_ sender: AnyObject) {
         page = Int(stepper.value)
         PageChange()

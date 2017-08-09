@@ -40,10 +40,10 @@ class RollingSelector {
         
         for i in 1...3 {
             let t : SKSpriteNode = SKSpriteNode(imageNamed: name + "_" + String(describing: i))
-            //if(t != nil) {
-            t.texture?.filteringMode = .nearest
+            if(t != nil) {
+                t.texture?.filteringMode = .nearest
                 textures.append(t)
-            //}
+            }
         }
         
         let item = SKSpriteNode()
@@ -106,7 +106,7 @@ class RollingSelector {
         
         animating = true
         
-        let duration = 0.5
+        let duration = 0.25
         items[0].run(SKAction.move(to: rPos(), duration: TimeInterval(duration)))
         items[1].run(SKAction.move(to: mPos(), duration: TimeInterval(duration)),
                     completion: {self.resetItems()})
@@ -119,7 +119,7 @@ class RollingSelector {
         
         animating = true
         
-        let duration = 0.5
+        let duration = 0.25
         items[0].run(SKAction.move(to: lPos(), duration: TimeInterval(duration)))
         items[2].run(SKAction.move(to: mPos(), duration: TimeInterval(duration)),
                     completion: {self.resetItems()})

@@ -102,6 +102,8 @@ class StartGameScene: SKScene {
     var obs : SKSpriteNode = SKSpriteNode()
     var obs2 : SKSpriteNode = SKSpriteNode()
     var ground : SKSpriteNode = SKSpriteNode()
+    
+    let light = SKLightNode()
 
     // MARK : UI
     
@@ -159,6 +161,12 @@ class StartGameScene: SKScene {
         setUpPlayer();
         
         self.view!.isMultipleTouchEnabled = false;
+        
+        light.position = CGPoint(x: frame.midX, y: frame.midY)
+        light.isEnabled = true
+        light.falloff = 10
+        light.zPosition = 2
+        self.addChild(light)
     }
     
     func setUpGroundAndObstacles() {
@@ -623,7 +631,9 @@ class StartGameScene: SKScene {
                 obs2.physicsBody!.collisionBitMask = ground.physicsBody!.collisionBitMask
                 
                 obs2.position.y = obs.position.y + obs.size.height/2 + obs2.size.height/2 + spaceBetweenObstacles
-                
+            
+                light.position = CGPoint(x: frame.midX, y: obs.frame.maxY - ((obs.frame.maxY - obs2.frame.minY)/2))
+            
                 pointAwarded = false
             
             if(score <= 0) {
