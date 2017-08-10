@@ -96,8 +96,10 @@ class SkinEditorScene: SKScene {
         }*/
         
         do {
-            let save : SkinSave = try NSKeyedUnarchiver.unarchiveObject(withFile: SkinSave.ArchiveURL.path) as! SkinSave
-            return save
+            let save : SkinSave? = try NSKeyedUnarchiver.unarchiveObject(withFile: SkinSave.ArchiveURL.path) as? SkinSave
+            if(save != nil) {
+                return save!
+            }
         }
         
         return SkinSave(hat: 0, coat: 0)

@@ -19,8 +19,8 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
     @IBOutlet weak var GoogleAdBannerView: GADBannerView!
     
     var scene = SKScene(size: CGSize.zero)
-    var player = AVAudioPlayer()
-    let audioPath = Bundle.main.path(forResource: "beep", ofType: "aif")
+    //var player = AVAudioPlayer()
+    //let audioPath = Bundle.main.path(forResource: "beep", ofType: "aif")
 
 
     
@@ -82,12 +82,12 @@ class StartMenuViewController: UIViewController, GADBannerViewDelegate {
         popup.size = CGSize(width: 20, height: 20)
         popup.Pop(20, duration: 0.3, text: "+1")
         obs2.addChild(popup)
-        do {
-            try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath : audioPath!))
+        //do {
+        //    try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath : audioPath!))
        //     player.play()
-        }catch{
+        //}catch{
             
-        }
+        //}
     }
     
     func AnimatePlayer() {

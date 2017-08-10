@@ -249,7 +249,7 @@ class StartGameScene: SKScene {
         labelTryAgain.zPosition = -4
         labelPointsFrom.zPosition = -4
         
-        labelStartStay = SKLabelNode(text: "JUMPSQUARE")
+        labelStartStay = SKLabelNode(text: "HOPPERSQUARE")
         //labelStartTut = SKLabelNode(text: "Drag to prepare jump")
         //labelStartTutTap = SKLabelNode(text: "If you fall, tap to get back up again!")
         labelStartTap = SKLabelNode(text: "Tap to start")
